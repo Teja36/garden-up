@@ -1,4 +1,5 @@
 import Rating from "@/components/Rating";
+import ReviewForm from "./ReviewForm";
 
 const reviews = [
   {
@@ -88,6 +89,8 @@ const CustomerReviews = () => {
         <option value="Lowset Rating">Lowest Rating</option>
         <option value="Most Relevant">Most Relevant</option>
       </select>
+
+      <ReviewForm isActive={true} />
 
       {reviews.map(({ name, rating, dateOfReview, title, desc }, index) => (
         <div className="py-4 border-t border-gray-200" key={index}>
