@@ -31,9 +31,14 @@ const ProductCard = ({
           </span>
         )}
       </div>
-      <h2 className="font-bold text-xl">{name}</h2>
-      <Rating rating={rating} />
-      <p className="text-green-600 font-bold">₹ {price}</p>
+      <h2 className="font-semibold text-xl">{name}</h2>
+      <div className="flex items-center">
+        <Rating rating={rating} />
+        <span className="font-medium text-sm text-green-600 ml-1">
+          {rating}
+        </span>
+      </div>
+      <p className="text-green-600 font-medium">₹ {price}</p>
       <button className="text-white uppercase bg-green-600 p-2 text-sm hover:bg-green-700 transition ease-in-out duration-100">
         Add to Cart
       </button>
