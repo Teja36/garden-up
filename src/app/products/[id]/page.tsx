@@ -1,28 +1,25 @@
+import { PrismaClient } from "@prisma/client";
+
 import CustomerReviews from "./CustomerReviews";
 import Product from "./Product";
 import Recommended from "./Recommended";
 import StickyCard from "./StickyCard";
 
-const mockdata = {
-  name: "Snake Plant",
-  image: "/Plant.jpg",
-  price: 149,
-  rating: 4.8,
-  offerPrice: 49,
-};
+const page = async ({ params }: { params: { id: string } }) => {
+  const prisma = new PrismaClient();
 
-const page = () => {
+  const productData = await prisma.product.findUnique({
+    where: {
+      id: Number(params.id),
+    },
+  });
+
   return (
     <div className="container">
-      <Product />
-      <Recommended />
+      <Product {...productData} />
+      <Recommended categoryId={productData?.categoryId} />
       <CustomerReviews />
-      <StickyCard
-        title={mockdata.name}
-        img={mockdata.image}
-        price={mockdata.price}
-        offerPrice={mockdata.offerPrice}
-      />
+      <StickyCard {...productData} />
     </div>
   );
 };

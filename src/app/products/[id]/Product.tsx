@@ -1,40 +1,43 @@
 import Rating from "@/components/Rating";
 import Image from "next/image";
 
-const mockdata = {
-  name: "Snake Plant",
-  image: "/Plant.jpg",
-  price: 149,
-  rating: 4.8,
-  offerPrice: 49,
+type ProductProps = {
+  id: number;
+  name: string;
+  description?: string;
+  imageUrl: string;
+  price: number;
+  stock: number;
+  discount?: number;
 };
 
-const Product = () => {
+const Product = ({
+  id,
+  name,
+  description,
+  imageUrl,
+  price,
+  stock,
+  discount,
+}: ProductProps) => {
   return (
     <div className="flex justify-around p-2">
       <div className="relative w-1/2 h-96">
-        <Image
-          src={mockdata.image}
-          alt={mockdata.name}
-          fill={true}
-          className="object-cover"
-        />
+        <Image src={imageUrl} alt={name} fill={true} className="object-cover" />
       </div>
       <div className="w-1/2 p-4 flex flex-col gap-4 items-start">
-        <h1 className="font-bold text-4xl">{mockdata.name}</h1>
+        <h1 className="font-bold text-4xl">{name}</h1>
 
-        <Rating rating={mockdata.rating} />
+        <Rating rating={5} />
 
         <div className="flex gap-2 justify-start items-center">
-          {mockdata.offerPrice && (
-            <span className="text-gray-400 line-through">
-              ₹{mockdata.price}
-            </span>
+          {discount && (
+            <span className="text-gray-400 line-through">₹{price}</span>
           )}
           <span className="text-3xl text-green-600">
-            ₹{mockdata.offerPrice ? mockdata.offerPrice : mockdata.price}
+            ₹{discount ? discount : price}
           </span>
-          {mockdata.offerPrice && (
+          {discount && (
             <span className="bg-yellow-400 py-1 px-2 uppercase text-xs">
               Sale
             </span>
@@ -43,7 +46,7 @@ const Product = () => {
 
         <div className="flex justify-evenly gap-2">
           <button className="bg-slate-400 p-2">-</button>
-          <input type="number" min={1} max={5} value={1} />
+          <input type="number" min={1} max={5} />
           <button className="bg-slate-400 p-2">+</button>
         </div>
 

@@ -3,13 +3,13 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 
 type StickyCardProps = {
-  title: string;
-  img: string;
+  name: string;
+  imageUrl: string;
   price: number;
-  offerPrice?: number;
+  discount?: number;
 };
 
-const StickyCard = ({ title, img, price, offerPrice }: StickyCardProps) => {
+const StickyCard = ({ name, imageUrl, price, discount }: StickyCardProps) => {
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
@@ -36,8 +36,8 @@ const StickyCard = ({ title, img, price, offerPrice }: StickyCardProps) => {
       style={{ bottom: isVisible ? "0px" : "-80px" }}
     >
       <Image
-        src={img}
-        alt={title}
+        src={imageUrl}
+        alt={name}
         width={64}
         height={64}
         className="object-cover hidden md:block"
@@ -45,16 +45,16 @@ const StickyCard = ({ title, img, price, offerPrice }: StickyCardProps) => {
 
       <div className="flex flex-col">
         <h2 className="text-2xl font-semibold text-green-800 hidden md:block">
-          {title}
+          {name}
         </h2>
         <div>
-          {offerPrice ? (
+          {discount ? (
             <>
               <span className="text-sm text-gray-500 line-through">
                 ₹{price}
               </span>
               <span className="text-lg font-medium text-green-600 ml-2">
-                ₹{offerPrice}
+                ₹{price}
               </span>
             </>
           ) : (
