@@ -1,61 +1,14 @@
 import ProductCard from "@/components/ProductCard";
+import { PrismaClient } from "@prisma/client";
 
-const products = [
-  {
-    name: "Plant 1",
-    image: "/Plant.jpg",
-    rating: 5,
-    price: 99,
-  },
-  {
-    name: "Plant 2",
-    image: "/Plant.jpg",
-    rating: 4.5,
-    price: 199,
-    offer: "sale",
-  },
-  {
-    name: "Plant 3",
-    image: "/Plant.jpg",
-    rating: 3.8,
-    price: 49,
-  },
-  {
-    name: "Plant 4",
-    image: "/Plant.jpg",
-    rating: 2.1,
-    price: 499,
-    offer: "-20%",
-  },
-  {
-    name: "Plant 1",
-    image: "/Plant.jpg",
-    rating: 5,
-    price: 149,
-  },
-  {
-    name: "Plant 2",
-    image: "/Plant.jpg",
-    rating: 4.5,
-    price: 249,
-    offer: "sale",
-  },
-  {
-    name: "Plant 3",
-    image: "/Plant.jpg",
-    rating: 3.8,
-    price: 199,
-  },
-  {
-    name: "Plant 4",
-    image: "/Plant.jpg",
-    rating: 2.1,
-    price: 299,
-    offer: "-20%",
-  },
-];
-
-const NewArrivals = () => {
+const NewArrivals = async () => {
+  const prisma = new PrismaClient();
+  const products = await prisma.product.findMany({
+    orderBy: {
+      createdAt: "desc",
+    },
+    take: 8,
+  });
   return (
     <>
       <h1 className="font-bold text-4xl p-4">New Arrivals</h1>
