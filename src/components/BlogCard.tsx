@@ -41,7 +41,7 @@ const BlogCard = ({ title, category, img, desc, date }: BlogCardProps) => {
         </div>
         <h2 className="font-medium text-xl">{title}</h2>
         <p className="text-xs text-gray-400">{formattedDate}</p>
-        <p className="text-sm text-gray-700">{desc}</p>
+        <p className="text-sm text-gray-700 line-clamp-3">{desc}</p>
         <div className="flex items-center gap-2 ">
           <span className="w-4 h-[1px] bg-black group-hover:w-10 transition ease-in-out duration-200"></span>
           <button className="text-sm font-medium">Read more</button>

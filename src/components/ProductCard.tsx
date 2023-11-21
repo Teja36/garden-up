@@ -38,7 +38,7 @@ const ProductCard = ({
             </span>
           )}
         </div>
-        <h2 className="font-semibold text-xl">{name}</h2>
+        <h2 className="font-medium text-xl line-clamp-1">{name}</h2>
         <div className="flex items-center">
           <Rating rating={5} />
           <span className="font-medium text-sm text-green-600 ml-1">
