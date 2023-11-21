@@ -1,8 +1,7 @@
+import prisma from "../../utils/db";
 import ProductCard from "@/components/ProductCard";
-import { PrismaClient } from "@prisma/client";
 
 const NewArrivals = async () => {
-  const prisma = new PrismaClient();
   const products = await prisma.product.findMany({
     orderBy: {
       createdAt: "desc",

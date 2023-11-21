@@ -1,16 +1,16 @@
 import ProductCard from "@/components/ProductCard";
-import { PrismaClient } from "@prisma/client";
+import prisma from "../../../../utils/db";
 
 type RecommendedProps = {
   categoryId: number;
 };
 
 const Recommended = async ({ categoryId }: RecommendedProps) => {
-  const prisma = new PrismaClient();
   const products = await prisma.product.findMany({
     where: {
       categoryId: categoryId,
     },
+    take: 4,
   });
   return (
     <div className="mt-8">
