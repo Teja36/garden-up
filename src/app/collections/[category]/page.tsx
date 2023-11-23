@@ -12,6 +12,7 @@ const page = async ({
   searchParams: { [key: string]: string | string[] | undefined };
 }) => {
   const collectionName = params.category;
+  const sortBy = searchParams["sort-by"];
 
   const { description } = await prisma.collection.findFirst({
     where: {
@@ -21,16 +22,18 @@ const page = async ({
 
   const products = await prisma.product.findMany({
     where: {
+      ...(sortBy === "featured" && { featured: true }),
       category: {
         collection: {
           name: collectionName,
         },
       },
     },
-    take: 3,
+    ...((sortBy === "asc" || sortBy === "desc") && {
+      orderBy: { name: sortBy },
+    }),
+    // take: 9,
   });
-
-  console.log(searchParams);
 
   return (
     <div className="container mt-2">
@@ -38,7 +41,7 @@ const page = async ({
         <h1 className="text-4xl font-semibold capitalize">{collectionName}</h1>
         <p className="text-md mt-4">{description}</p>
       </div>
-      <SortByDropdown />
+      <SortByDropdown noOfProducts={products.length} />
       <div className="flex gap-4 justify-between sticky top-0">
         <FilterSidebar />
         <div className="grid grid-cols-3 gap-2">
