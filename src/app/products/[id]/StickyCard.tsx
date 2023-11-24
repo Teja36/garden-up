@@ -4,9 +4,9 @@ import Image from "next/image";
 
 type StickyCardProps = {
   name: string;
-  imageUrl: string;
+  imageUrl: string | null;
   price: number;
-  discount?: number;
+  discount: number | null;
 };
 
 const StickyCard = ({ name, imageUrl, price, discount }: StickyCardProps) => {
@@ -36,7 +36,7 @@ const StickyCard = ({ name, imageUrl, price, discount }: StickyCardProps) => {
       style={{ bottom: isVisible ? "0px" : "-80px" }}
     >
       <Image
-        src={imageUrl}
+        src={imageUrl || "/Plant.jpg"}
         alt={name}
         width={64}
         height={64}

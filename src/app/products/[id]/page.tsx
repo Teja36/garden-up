@@ -14,10 +14,14 @@ const page = async ({ params }: { params: { id: string } }) => {
 
   return (
     <div className="container">
-      <Product {...productData} />
-      <Recommended categoryId={productData?.categoryId} />
-      <CustomerReviews />
-      <StickyCard {...productData} />
+      {productData && (
+        <>
+          <Product {...productData} />
+          <Recommended categoryId={productData?.categoryId} />
+          <CustomerReviews />
+          <StickyCard {...productData} />
+        </>
+      )}
     </div>
   );
 };
