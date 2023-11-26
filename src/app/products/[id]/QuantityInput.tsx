@@ -39,7 +39,7 @@ const QuantityInput = () => {
       </button>
       <input
         type="number"
-        className="w-12 text-center"
+        className="w-6 xs:w-12 text-center"
         value={quantity}
         min={1}
         max={5}

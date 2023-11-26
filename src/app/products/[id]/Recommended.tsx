@@ -13,14 +13,16 @@ const Recommended = async ({ categoryId }: RecommendedProps) => {
     take: 4,
   });
   return (
-    <div className="mt-8">
-      <h2 className="font-semibold text-3xl">Customers also bought</h2>
-      <div className="flex  justify-around  gap-2 max-w-full">
+    <>
+      <h2 className="font-medium text-2xl md:text-4xl mt-12">
+        Customers also bought
+      </h2>
+      <div className="mt-4 grid grid-cols-2 gap-2 xs:gap-6 lg:grid-cols-4">
         {products.map((product, index) => (
           <ProductCard key={index} {...product} />
         ))}
       </div>
-    </div>
+    </>
   );
 };
 

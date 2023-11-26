@@ -12,6 +12,7 @@ type ProductProps = {
   price: number;
   stock: number;
   discount: number | null;
+  featured: boolean;
 };
 
 const Product = ({
@@ -22,19 +23,20 @@ const Product = ({
   price,
   stock,
   discount,
+  featured,
 }: ProductProps) => {
   return (
-    <div className="flex justify-around p-2 border-b border-gray-400">
-      <div className="relative w-1/2 h-screen">
+    <div className="w-full flex flex-col md:flex-row justify-around gap-8 border-b border-gray-400">
+      <div className="relative w-full md:w-1/2 h-96 xs:h-[70vh] md:h-screen">
         <Image
-          src={imageUrl || "/Plant.jpg"}
+          src={imageUrl ?? "/Plant.jpg"}
           alt={name}
           fill={true}
-          className="object-cover"
+          className="object-cover xs:object-contain md:object-cover"
         />
       </div>
-      <div className="w-1/2 p-4 flex flex-col gap-4 items-start">
-        <h1 className="font-medium text-4xl">{name}</h1>
+      <div className="w-full md:w-1/2 px-2 md:px-4 py-8 flex flex-col gap-4 items-start">
+        <h1 className="font-medium text-2xl xs:text-4xl">{name}</h1>
 
         <Rating rating={5} />
 
@@ -46,11 +48,17 @@ const Product = ({
             ₹{discount ? Math.round(price - (price / 100) * discount) : price}
           </span>
           {Boolean(discount) && (
-            <span className="bg-yellow-400 py-1 px-2 uppercase text-xs">
+            <span className="bg-yellow-400 py-1 px-2 uppercase text-xs font-medium text-green-900">
               Sale
             </span>
           )}
         </div>
+
+        {Boolean(discount) && (
+          <div className="w-full bg-yellow-400 text-green-950 p-2 text-xs font-semibold uppercase border-dashed border border-green-900">
+            Offer valid till stocks last!
+          </div>
+        )}
 
         <div className="flex justify-between gap-4 w-full">
           <QuantityInput />
@@ -62,9 +70,11 @@ const Product = ({
           </button>
         </div>
 
-        <button className="text-white bg-green-600 uppercase p-2 w-full hover:bg-green-700">
-          Buy It Now
-        </button>
+        {featured && (
+          <button className="text-white bg-green-600 uppercase p-2 w-full hover:bg-green-700">
+            Buy It Now
+          </button>
+        )}
 
         <ThisIsAGift />
 

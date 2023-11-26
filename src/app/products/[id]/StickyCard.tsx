@@ -44,7 +44,7 @@ const StickyCard = ({ name, imageUrl, price, discount }: StickyCardProps) => {
       />
 
       <div className="flex flex-col">
-        <h2 className="text-2xl font-semibold text-green-800 hidden md:block">
+        <h2 className="text-2xl font-medium text-green-800 hidden md:block">
           {name}
         </h2>
         <div>

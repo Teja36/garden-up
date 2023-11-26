@@ -7,9 +7,11 @@ export default function Home() {
   return (
     <main>
       <OfferCarousel />
-      <BestSellers />
-      <NewArrivals />
-      <DealOfTheWeek />
+      <div className="container">
+        <BestSellers />
+        <NewArrivals />
+        <DealOfTheWeek />
+      </div>
     </main>
   );
 }

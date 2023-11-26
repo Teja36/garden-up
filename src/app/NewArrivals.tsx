@@ -10,15 +10,15 @@ const NewArrivals = async () => {
   });
   return (
     <>
-      <h1 className="font-bold text-4xl p-4">New Arrivals</h1>
-      <div className="flex flex-wrap justify-evenly mt-8 gap-2 max-w-full">
+      <h1 className="font-medium text-2xl md:text-4xl mt-12">New Arrivals</h1>
+      <div className="mt-4 grid grid-cols-2 gap-2 xs:gap-6 lg:grid-cols-4">
         {products.map((product, index) => (
           <ProductCard key={index} {...product} />
         ))}
-        <button className="w-1/6 mt-6 text-white uppercase  bg-green-600 p-2 text-sm hover:bg-green-700 transition ease-in-out duration-100">
-          View All
-        </button>
       </div>
+      <button className="w-56 block mt-6 mx-auto text-white uppercase  bg-green-600 p-2 text-sm hover:bg-green-700 transition ease-in-out duration-100">
+        View All
+      </button>
     </>
   );
 };
