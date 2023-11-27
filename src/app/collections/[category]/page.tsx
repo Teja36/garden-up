@@ -2,7 +2,7 @@ import prisma from "../../../../utils/db";
 
 import ProductCard from "@/components/ProductCard";
 import FilterSidebar from "./FilterSidebar";
-import SortByDropdown from "./SortByDropdown";
+import SortByDropdown from "../../../components/SortByDropdown";
 
 const page = async ({
   params,

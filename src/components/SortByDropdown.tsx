@@ -2,7 +2,11 @@
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import React, { ChangeEvent } from "react";
 
-const SortByDropdown = ({ noOfProducts }: { noOfProducts: number }) => {
+type SortByDropdownProps = {
+  noOfProducts?: number;
+};
+
+const SortByDropdown = ({ noOfProducts }: SortByDropdownProps) => {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
@@ -56,7 +60,9 @@ const SortByDropdown = ({ noOfProducts }: { noOfProducts: number }) => {
         </li>
       </ul>
     </details> */}
-      <p className="text-sm text-gray-400">{noOfProducts} products</p>
+      {noOfProducts && (
+        <p className="text-sm text-gray-400">{noOfProducts} products</p>
+      )}
     </div>
   );
 };
