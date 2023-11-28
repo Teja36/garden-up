@@ -2,6 +2,7 @@ import { Heart, ShoppingCart, User2 } from "lucide-react";
 import Menubar from "./Menubar";
 import SearchInput from "./SearchInput";
 import Link from "next/link";
+import SignInButton from "./SignInButton";
 
 const Navbar = () => {
   return (
@@ -15,6 +16,7 @@ const Navbar = () => {
         </div>
         <div className="flex justify-between items-center gap-3">
           <User2 />
+          <SignInButton />
           <span className="flex justify-between items-center gap-1">
             <p>Wishlist</p>
             <Heart />
