@@ -40,3 +40,11 @@ model Product {
   categoryId  Int
   category    Category @relation(fields: [categoryId], references: [id])
 }
+
+model User {
+  id            String    @id @default(cuid())
+  name          String?
+  email         String?   @unique
+  emailVerified DateTime?
+  image         String?
+}
