@@ -1,40 +1,31 @@
+import Image from "next/image";
 import Rating from "@/components/Rating";
 import ReviewForm from "./ReviewForm";
+import formatDate from "../../../../utils/formatDate";
+import prisma from "../../../../utils/db";
 
-const reviews = [
-  {
-    name: "Zxc",
-    rating: 5,
-    dateOfReview: "07/07/2023",
-    title: "Good",
-    desc: "It was good.",
-  },
-  {
-    name: "Abcd",
-    rating: 4,
-    dateOfReview: "05/11/2023",
-    title: "Nice",
-    desc: "Nice packing. The plant was in good condition. Overall good experience.",
-  },
-  {
-    name: "Xyz",
-    rating: 5,
-    dateOfReview: "01/09/2023",
-    title: "beautiful plant and packaging!",
-    desc: "I'd ordered a Fern morpankhi plant and was pleasantly surprised when it was delivered. The plant was packed in a very beautiful cylindrical tube due to which the plant stayed intact while it was travelling. The plant was in a very healthy condition and there were clear instructions as to what needs to be done once we receive the plant. Kudos to Ugaoo for delivering a beautiful plant. Will be buying many more plants!!!",
-  },
-];
+const CustomerReviews = async () => {
+  const reviews = await prisma.review.findMany({
+    where: {
+      productId: 1,
+    },
+    include: {
+      user: {
+        select: {
+          name: true,
+          image: true,
+        },
+      },
+    },
+  });
 
-const CustomerReviews = () => {
   const ratingAverage = reviews
     .map(({ rating }) => rating)
-    .reduce(
-      (prev, curr, index, arr) =>
-        index === arr.length - 1
-          ? ((prev + curr) / arr.length).toFixed(2)
-          : prev + curr,
-      0
-    );
+    .reduce((prev, curr, index, arr) => {
+      if (index === arr.length - 1)
+        return parseInt(((prev + curr) / arr.length).toFixed(2));
+      return prev + curr;
+    }, 0);
 
   const dataForHistogram = reviews
     .map(({ rating }) => rating)
@@ -49,7 +40,7 @@ const CustomerReviews = () => {
       <h3 className="font-medium text-2xl">Customer Reviews</h3>
       <div className="mt-4 flex gap-4">
         <div>
-          <Rating rating={5} />
+          <Rating rating={ratingAverage} />
           <p className="text-md">
             {ratingAverage} based on {reviews.length} reviews
           </p>
@@ -90,26 +81,33 @@ const CustomerReviews = () => {
         <option value="Most Relevant">Most Relevant</option>
       </select>
 
-      <ReviewForm isActive={true} />
+      <ReviewForm isActive={false} />
 
-      {reviews.map(({ name, rating, dateOfReview, title, desc }, index) => (
-        <div className="py-4 border-t border-gray-200" key={index}>
+      {reviews.map(({ id, rating, createdAt, title, description, user }) => (
+        <div className="py-4 border-t border-gray-200" key={id}>
           <div className="flex gap-2">
-            <div className="w-12 h-12 flex justify-center items-center bg-gray-200 rounded-full">
+            {/* <div className="w-12 h-12 flex justify-center items-center bg-gray-200 rounded-full">
               <span className="text-sm">{name.charAt(0)}</span>
-            </div>
+            </div> */}
+            <Image
+              src={user.image!}
+              alt={user.name!}
+              width={48}
+              height={48}
+              className="object-cover rounded-full"
+            />
 
             <div className="flex flex-col">
               <span className="flex">
                 <Rating rating={rating} />
-                <span className="text-sm ml-2">{dateOfReview}</span>
+                <span className="text-sm ml-2">{formatDate(createdAt)}</span>
               </span>
-              <span className="font-medium">{name}</span>
+              <span className="font-medium">{user.name}</span>
             </div>
           </div>
           <div className="py-2">
             <h4 className="font-semibold">{title}</h4>
-            <p className="text-sm">{desc}</p>
+            <p className="text-sm">{description}</p>
           </div>
         </div>
       ))}
