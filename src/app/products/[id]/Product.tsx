@@ -12,7 +12,7 @@ type ProductProps = {
   price: number;
   stock: number;
   discount: number | null;
-  featured: boolean;
+  featured: boolean | null;
 };
 
 const Product = ({

@@ -18,7 +18,7 @@ const page = async ({ params }: { params: { id: string } }) => {
         <>
           <Product {...productData} />
           <Recommended categoryId={productData?.categoryId} />
-          <CustomerReviews />
+          <CustomerReviews productId={productData.id} />
           <StickyCard {...productData} />
         </>
       )}

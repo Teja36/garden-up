@@ -4,10 +4,10 @@ import ReviewForm from "./ReviewForm";
 import formatDate from "../../../../utils/formatDate";
 import prisma from "../../../../utils/db";
 
-const CustomerReviews = async () => {
+const CustomerReviews = async ({ productId }: { productId: number }) => {
   const reviews = await prisma.review.findMany({
     where: {
-      productId: 1,
+      productId: productId,
     },
     include: {
       user: {
@@ -17,23 +17,45 @@ const CustomerReviews = async () => {
         },
       },
     },
+    orderBy: {
+      createdAt: "desc",
+    },
   });
 
   const ratingAverage = reviews
     .map(({ rating }) => rating)
     .reduce((prev, curr, index, arr) => {
       if (index === arr.length - 1)
-        return parseInt(((prev + curr) / arr.length).toFixed(2));
+        return parseFloat(((prev + curr) / arr.length).toFixed(2));
       return prev + curr;
     }, 0);
 
   const dataForHistogram = reviews
     .map(({ rating }) => rating)
-    .reduce((prev, curr, index, arr) => {
+    .reduce((prev, curr) => {
       prev[curr - 1]++;
       return prev;
     }, Array(5).fill(0))
     .reverse();
+
+  if (reviews.length === 0) {
+    return (
+      <div className="mt-8">
+        <h3 className="font-medium text-2xl">Customer Reviews</h3>
+        <div className="mt-4 flex gap-4">
+          <div className="flex items-center gap-2 w-full">
+            <Rating rating={0} />
+            <p className="font-medium text-sm">
+              Be the first to write a review
+            </p>
+            <button className="h-min w-32 p-1 ml-auto font-medium text-green-600  border border-green-600">
+              Write a Review
+            </button>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="mt-8">
@@ -66,7 +88,7 @@ const CustomerReviews = async () => {
             </div>
           ))}
         </div>
-        <button className="h-min w-32 p-1 ml-auto font-medium underline border border-black">
+        <button className="h-min w-32 p-1 ml-auto font-medium text-green-600  border border-green-600">
           Write a Review
         </button>
       </div>
@@ -81,7 +103,7 @@ const CustomerReviews = async () => {
         <option value="Most Relevant">Most Relevant</option>
       </select>
 
-      <ReviewForm isActive={false} />
+      <ReviewForm isActive={true} productId={productId} />
 
       {reviews.map(({ id, rating, createdAt, title, description, user }) => (
         <div className="py-4 border-t border-gray-200" key={id}>
