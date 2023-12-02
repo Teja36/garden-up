@@ -39,6 +39,7 @@ model Product {
   discount    Float?
   categoryId  Int
   category    Category @relation(fields: [categoryId], references: [id])
+  rating      Decimal? @default(0) @db.Decimal(2, 1)
   reviews     Review[]
 }
 
