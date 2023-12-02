@@ -2,14 +2,15 @@ import Image from "next/image";
 import Link from "next/link";
 
 import Rating from "./Rating";
+import { Decimal } from "@prisma/client/runtime/library";
 
 type ProductCardProps = {
   id: number;
   name: string;
-  imageUrl: string;
-  rating: number;
+  imageUrl: string | null;
+  rating: Decimal | null;
   price: number;
-  discount?: number;
+  discount: number | null;
   stock: number;
 };
 
@@ -27,9 +28,8 @@ const ProductCard = ({
       <div className="flex flex-col w-full gap-2 group">
         <div className="relative w-full h-48 xs:h-96 overflow-hidden">
           <Image
-            src={imageUrl}
+            src={imageUrl ?? ""}
             alt="plant"
-            loading="lazy"
             fill={true}
             className="object-cover group-hover:scale-105 transition ease-linear duration-300 "
           />
@@ -43,10 +43,12 @@ const ProductCard = ({
           {name}
         </h2>
         <div className="flex items-center">
-          <Rating rating={5} />
-          <span className="font-medium text-sm text-green-600 ml-1">
-            {rating}
-          </span>
+          <Rating rating={rating} />
+          {rating?.toNumber()! > 0 && (
+            <span className="font-medium text-sm text-green-600 ml-1">
+              {rating?.toString()}
+            </span>
+          )}
         </div>
         <div>
           {Boolean(discount) && (

@@ -19,7 +19,12 @@ const page = async ({ params }: { params: { id: string } }) => {
           <Product {...productData} />
           <Recommended categoryId={productData?.categoryId} />
           <CustomerReviews productId={productData.id} />
-          <StickyCard {...productData} />
+          <StickyCard
+            discount={productData.discount}
+            imageUrl={productData.imageUrl}
+            name={productData.name}
+            price={productData.price}
+          />
         </>
       )}
     </div>

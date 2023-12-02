@@ -1,13 +1,25 @@
 import { Star, StarHalf } from "lucide-react";
+import { Decimal } from "@prisma/client/runtime/library";
 
 type RatingProps = {
-  rating: number;
+  rating?: Decimal | null;
   size?: number;
 };
 
 const Rating = ({ rating, size = 18 }: RatingProps) => {
   const [integer, fractional] = (rating + "").split(".").map((x) => Number(x));
   const dullStars = fractional >= 5 ? 5 - integer - 1 : 5 - integer;
+
+  if (!rating)
+    return (
+      <div className="flex" style={{ gap: size === 18 ? "2px" : "4px" }}>
+        {[...Array(5)].map((_, index) => (
+          <span key={index} className="text-yellow-400">
+            <Star size={size} />
+          </span>
+        ))}
+      </div>
+    );
 
   return (
     <div className="flex" style={{ gap: size === 18 ? "2px" : "4px" }}>

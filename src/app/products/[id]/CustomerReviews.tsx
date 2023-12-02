@@ -3,6 +3,7 @@ import Rating from "@/components/Rating";
 import ReviewForm from "./ReviewForm";
 import formatDate from "../../../../utils/formatDate";
 import prisma from "../../../../utils/db";
+import { Decimal } from "@prisma/client/runtime/library";
 
 const CustomerReviews = async ({ productId }: { productId: number }) => {
   const reviews = await prisma.review.findMany({
@@ -44,7 +45,7 @@ const CustomerReviews = async ({ productId }: { productId: number }) => {
         <h3 className="font-medium text-2xl">Customer Reviews</h3>
         <div className="mt-4 flex gap-4">
           <div className="flex items-center gap-2 w-full">
-            <Rating rating={0} />
+            <Rating />
             <p className="font-medium text-sm">
               Be the first to write a review
             </p>
@@ -62,7 +63,7 @@ const CustomerReviews = async ({ productId }: { productId: number }) => {
       <h3 className="font-medium text-2xl">Customer Reviews</h3>
       <div className="mt-4 flex gap-4">
         <div>
-          <Rating rating={ratingAverage} />
+          <Rating rating={new Decimal(ratingAverage)} />
           <p className="text-md">
             {ratingAverage} based on {reviews.length} reviews
           </p>
@@ -70,7 +71,7 @@ const CustomerReviews = async ({ productId }: { productId: number }) => {
         <div className="px-4 border-x border-gray-200">
           {dataForHistogram.map((val, index) => (
             <div key={index} className="flex items-center mb-1">
-              <Rating rating={5 - index} size={15} />
+              <Rating rating={new Decimal(5 - index)} size={15} />
               <div className="w-[120px] h-[18px] md:h-4 ml-1 border border-gray-200 ">
                 <div
                   style={{
@@ -121,7 +122,7 @@ const CustomerReviews = async ({ productId }: { productId: number }) => {
 
             <div className="flex flex-col">
               <span className="flex">
-                <Rating rating={rating} />
+                <Rating rating={new Decimal(rating)} />
                 <span className="text-sm ml-2">{formatDate(createdAt)}</span>
               </span>
               <span className="font-medium">{user.name}</span>

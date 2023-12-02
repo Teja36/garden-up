@@ -3,6 +3,7 @@ import Image from "next/image";
 import Rating from "@/components/Rating";
 import ThisIsAGift from "./ThisIsAGift";
 import QuantityInput from "./QuantityInput";
+import { Decimal } from "@prisma/client/runtime/library";
 
 type ProductProps = {
   id: number;
@@ -11,6 +12,7 @@ type ProductProps = {
   imageUrl: string | null;
   price: number;
   stock: number;
+  rating: Decimal | null;
   discount: number | null;
   featured: boolean | null;
 };
@@ -22,6 +24,7 @@ const Product = ({
   imageUrl,
   price,
   stock,
+  rating,
   discount,
   featured,
 }: ProductProps) => {
@@ -38,7 +41,7 @@ const Product = ({
       <div className="w-full md:w-1/2 px-2 md:px-4 py-8 flex flex-col gap-4 items-start">
         <h1 className="font-medium text-2xl xs:text-4xl">{name}</h1>
 
-        <Rating rating={5} />
+        <Rating rating={rating!} />
 
         <div className="flex gap-2 justify-start items-center">
           {Boolean(discount) && (
