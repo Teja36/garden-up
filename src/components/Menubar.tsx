@@ -1,167 +1,55 @@
 "use client";
+import Link from "next/link";
 import {
   NavigationMenu,
   NavigationMenuContent,
-  NavigationMenuIndicator,
   NavigationMenuItem,
-  NavigationMenuLink,
   NavigationMenuList,
   NavigationMenuTrigger,
-  NavigationMenuViewport,
-  navigationMenuTriggerStyle,
-} from "@/components/ui/navigation-menu";
-import Link from "next/link";
+} from "./ui/navigation-menu";
+import { MENU_ITEMS } from "@/constants/constants";
+import { Button } from "./ui/button";
 
 const Menubar = () => {
   return (
-    <nav className=" w-full hidden sm:flex justify-center items-center">
+    <nav className=" w-full hidden sm:flex justify-start items-center gap-2">
       <NavigationMenu>
-        <NavigationMenuList>
-          <NavigationMenuItem>
-            <NavigationMenuTrigger>Plants</NavigationMenuTrigger>
-            <NavigationMenuContent>
-              <ul className="flex flex-col justify-start">
-                <li>
-                  <Link href="/plants/indoor" legacyBehavior passHref>
-                    <NavigationMenuLink
-                      className={navigationMenuTriggerStyle()}
+        {MENU_ITEMS.map((menuItem) => (
+          <NavigationMenuList key={menuItem.title}>
+            <NavigationMenuItem>
+              <NavigationMenuTrigger>
+                <Button
+                  variant={"link"}
+                  asChild
+                  className="text-white uppercase tracking-widest hover:opacity-50"
+                >
+                  <span>{menuItem.title}</span>
+                </Button>
+              </NavigationMenuTrigger>
+              <NavigationMenuContent className="absolute">
+                <ul className="w-max">
+                  {menuItem.content.map((menuSubItem) => (
+                    <li
+                      key={menuSubItem.title}
+                      className="text-sm hover:opacity-50"
                     >
-                      Indoor
-                    </NavigationMenuLink>
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/plants/flower" legacyBehavior passHref>
-                    <NavigationMenuLink
-                      className={navigationMenuTriggerStyle()}
-                    >
-                      Flower
-                    </NavigationMenuLink>
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/plants/fruit" legacyBehavior passHref>
-                    <NavigationMenuLink
-                      className={navigationMenuTriggerStyle()}
-                    >
-                      Fruit
-                    </NavigationMenuLink>
-                  </Link>
-                </li>
-              </ul>
-            </NavigationMenuContent>
-          </NavigationMenuItem>
-          <NavigationMenuItem>
-            <NavigationMenuTrigger>Pots & Planters</NavigationMenuTrigger>
-            <NavigationMenuContent>
-              <ul className="flex flex-col justify-start">
-                <li>
-                  <Link href="/plants/indoor" legacyBehavior passHref>
-                    <NavigationMenuLink
-                      className={navigationMenuTriggerStyle()}
-                    >
-                      Terracota
-                    </NavigationMenuLink>
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/plants/flower" legacyBehavior passHref>
-                    <NavigationMenuLink
-                      className={navigationMenuTriggerStyle()}
-                    >
-                      Growbags
-                    </NavigationMenuLink>
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/plants/fruit" legacyBehavior passHref>
-                    <NavigationMenuLink
-                      className={navigationMenuTriggerStyle()}
-                    >
-                      Sustainable
-                    </NavigationMenuLink>
-                  </Link>
-                </li>
-              </ul>
-            </NavigationMenuContent>
-          </NavigationMenuItem>
-          <NavigationMenuItem>
-            <NavigationMenuTrigger>Decor</NavigationMenuTrigger>
-            <NavigationMenuContent>
-              <ul className="flex flex-col justify-start">
-                <li>
-                  <Link href="/plants/indoor" legacyBehavior passHref>
-                    <NavigationMenuLink
-                      className={navigationMenuTriggerStyle()}
-                    >
-                      Terracota
-                    </NavigationMenuLink>
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/plants/flower" legacyBehavior passHref>
-                    <NavigationMenuLink
-                      className={navigationMenuTriggerStyle()}
-                    >
-                      Growbags
-                    </NavigationMenuLink>
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/plants/fruit" legacyBehavior passHref>
-                    <NavigationMenuLink
-                      className={navigationMenuTriggerStyle()}
-                    >
-                      Sustainable
-                    </NavigationMenuLink>
-                  </Link>
-                </li>
-              </ul>
-            </NavigationMenuContent>
-          </NavigationMenuItem>
-          <NavigationMenuItem>
-            <NavigationMenuTrigger>Essentials</NavigationMenuTrigger>
-            <NavigationMenuContent>
-              <ul className="flex flex-col justify-start">
-                <li>
-                  <Link href="/plants/indoor" legacyBehavior passHref>
-                    <NavigationMenuLink
-                      className={navigationMenuTriggerStyle()}
-                    >
-                      Terracota
-                    </NavigationMenuLink>
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/plants/flower" legacyBehavior passHref>
-                    <NavigationMenuLink
-                      className={navigationMenuTriggerStyle()}
-                    >
-                      Growbags
-                    </NavigationMenuLink>
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/plants/fruit" legacyBehavior passHref>
-                    <NavigationMenuLink
-                      className={navigationMenuTriggerStyle()}
-                    >
-                      Sustainable
-                    </NavigationMenuLink>
-                  </Link>
-                </li>
-              </ul>
-            </NavigationMenuContent>
-          </NavigationMenuItem>
-          <NavigationMenuItem>
-            <Link href="/blog" legacyBehavior passHref>
-              <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-                Blog
-              </NavigationMenuLink>
-            </Link>
-          </NavigationMenuItem>
-        </NavigationMenuList>
+                      <Button variant={"link"} asChild>
+                        <Link href={menuSubItem.href}>{menuSubItem.title}</Link>
+                      </Button>
+                    </li>
+                  ))}
+                </ul>
+              </NavigationMenuContent>
+            </NavigationMenuItem>
+          </NavigationMenuList>
+        ))}
       </NavigationMenu>
+      <Button
+        variant={"link"}
+        className="text-white uppercase tracking-widest hover:opacity-50"
+      >
+        Blog
+      </Button>
     </nav>
   );
 };
