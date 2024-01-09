@@ -2,12 +2,14 @@ import OfferCarousel from "./OfferCarousel";
 import BestSellers from "./BestSellers";
 import NewArrivals from "./NewArrivals";
 import DealOfTheWeek from "./DealOfTheWeek";
+import QuickBrowse from "./QuickBrowse";
 
 export default function Home() {
   return (
     <main>
       <OfferCarousel />
       <div className="container">
+        <QuickBrowse />
         <BestSellers />
         <NewArrivals />
         <DealOfTheWeek />
