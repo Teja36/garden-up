@@ -1,32 +1,55 @@
+"use client";
+
+import { useEffect, useState } from "react";
+
+import { useCartStore } from "@/store/cart";
+
 import Image from "next/image";
-import prisma from "../../../utils/db";
-import QuantityInput from "../products/[id]/QuantityInput";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { ShoppingCart } from "lucide-react";
 import Link from "next/link";
 
-const cartItems = [1, 10, 3, 12, 9, 2];
-// const cartItems: number[] = [];
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 
-const page = async () => {
-  const items = await prisma.product.findMany({
-    where: {
-      id: {
-        in: cartItems,
-      },
-    },
-    select: {
-      id: true,
-      name: true,
-      imageUrl: true,
-      stock: true,
-      price: true,
-      discount: true,
-    },
-  });
+import QuantityInput from "../products/[id]/QuantityInput";
 
-  if (items?.length <= 0) {
+import { ShoppingCart } from "lucide-react";
+
+type itemType = {
+  id: number;
+  name: string;
+  imageUrl: string;
+  stock: boolean;
+  price: number;
+  discount: number;
+};
+
+const page = () => {
+  const [items, setItems] = useState<itemType[] | null>();
+
+  const cartItems = useCartStore((state) => state.cart);
+
+  const remove = useCartStore((state) => state.remove);
+
+  const productIds = cartItems.map((product) => product.id);
+
+  const queryString = `productIds=${productIds.join(",")}`;
+
+  useEffect(() => {
+    fetch(`/api/products/?${queryString}`)
+      .then((response) => response.json())
+      .then((data) => {
+        console.log("Data from Response handler:", data);
+        setItems(data);
+      })
+      .catch((error) => console.error("Error:", error));
+  }, []);
+
+  const handleRemove = (id: number) => {
+    setItems((prev) => prev?.filter((item) => item.id !== id));
+    remove(id);
+  };
+
+  if (items && items?.length <= 0) {
     return (
       <div className="container h-[60vh] flex flex-col items-center justify-center gap-4">
         <ShoppingCart className="w-32 h-32" />
@@ -43,7 +66,7 @@ const page = async () => {
   return (
     <>
       <h1 className="text-xl lg:text-2xl text-center font-medium text-green-950 p-4 bg-green-200 ">
-        You have {items.length} item(s) in Cart
+        You have {items && items?.length} item(s) in Cart
       </h1>
       <div className="container">
         <div className="grid grid-cols-1 lg:grid-cols-[75fr,25fr] gap-x-8 gap-y-2 p-2">
@@ -56,12 +79,12 @@ const page = async () => {
               </tr>
             </thead>
             <tbody className="text-center">
-              {items.map((item) => (
+              {items?.map((item) => (
                 <tr key={item.id} className="border-b border-gray-200">
                   <td>
                     <div className="flex items-center">
                       <Image
-                        src={item.imageUrl!}
+                        src={item.imageUrl}
                         alt={item.name}
                         width={128}
                         height={128}
@@ -77,7 +100,11 @@ const page = async () => {
                   <td>
                     <div className="flex flex-col  gap-2">
                       <QuantityInput />
-                      <Button variant={"link"} className="hover:text-green-600">
+                      <Button
+                        variant={"link"}
+                        className="hover:text-green-600"
+                        onClick={() => handleRemove(item.id)}
+                      >
                         Remove
                       </Button>
                     </div>
