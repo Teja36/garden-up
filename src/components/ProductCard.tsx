@@ -3,6 +3,7 @@ import Link from "next/link";
 
 import Rating from "./Rating";
 import { Decimal } from "@prisma/client/runtime/library";
+import AddToCartButton from "./AddToCartButton";
 
 type ProductCardProps = {
   id: number;
@@ -24,8 +25,8 @@ const ProductCard = ({
   stock,
 }: ProductCardProps) => {
   return (
-    <Link href={`/products/${id}`}>
-      <div className="flex flex-col w-full gap-2 group">
+    <div className="flex flex-col w-full gap-2 group">
+      <Link href={`/products/${id}`}>
         <div className="relative w-full h-48 xs:h-96 overflow-hidden">
           <Image
             src={imageUrl ?? ""}
@@ -60,14 +61,9 @@ const ProductCard = ({
             ₹{discount ? Math.round(price - (price / 100) * discount) : price}
           </span>
         </div>
-        <button
-          disabled={stock === 0}
-          className="text-white uppercase bg-green-600 p-2 text-sm hover:bg-green-700 transition ease-in-out duration-100"
-        >
-          {stock > 0 ? "Add to Cart" : "Out of Stock"}
-        </button>
-      </div>
-    </Link>
+      </Link>
+      <AddToCartButton id={id} stock={stock} />
+    </div>
   );
 };
 
