@@ -3,6 +3,7 @@ import SearchInput from "./SearchInput";
 import Link from "next/link";
 import SignInButton from "./SignInButton";
 import Menubar from "./Menubar";
+import CartItemCountIndicator from "./CartItemCountIndicator";
 
 const Navbar = () => {
   return (
@@ -22,8 +23,11 @@ const Navbar = () => {
           <p>Wishlist</p>
           <Heart />
         </span>
-        <span>
-          <ShoppingCart />
+        <span className="relative">
+          <Link href="/cart">
+            <ShoppingCart color="white" />
+            <CartItemCountIndicator />
+          </Link>
         </span>
       </div>
     </div>
