@@ -1,10 +1,10 @@
 "use client";
 
 import { useCartStore } from "@/store/cart";
+import useStore from "../../utils/useStore";
 
 const CartItemCountIndicator = () => {
-  const count = useCartStore((state) => state.cart.length);
-  console.log(count);
+  const count = useStore(useCartStore, (state) => state.cart.length);
 
   if (count === 0) return null;
 
