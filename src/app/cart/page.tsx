@@ -8,9 +8,9 @@ import Image from "next/image";
 import Link from "next/link";
 
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
 
 import QuantityInput from "../products/[id]/QuantityInput";
+import Subtotal from "./Subtotal";
 
 import { ShoppingCart } from "lucide-react";
 
@@ -21,6 +21,7 @@ type itemType = {
   stock: boolean;
   price: number;
   discount: number;
+  quantity: number;
 };
 
 const page = () => {
@@ -30,6 +31,8 @@ const page = () => {
 
   const remove = useCartStore((state) => state.remove);
 
+  const changeQuantity = useCartStore((state) => state.changeQuantity);
+
   const productIds = cartItems.map((product) => product.id);
 
   const queryString = `productIds=${productIds.join(",")}`;
@@ -38,11 +41,25 @@ const page = () => {
     fetch(`/api/products/?${queryString}`)
       .then((response) => response.json())
       .then((data) => {
-        console.log("Data from Response handler:", data);
-        setItems(data);
+        const newData = data.map((item: any) => {
+          let quantity = cartItems.find((val) => val.id === item.id)?.quantity;
+          return { ...item, quantity };
+        });
+        setItems(newData);
       })
       .catch((error) => console.error("Error:", error));
   }, []);
+
+  const handleQuantityChange = (id: number, quantity: number) => {
+    const newItems = items?.map((item) => {
+      if (item.id === id) return { ...item, quantity: quantity };
+
+      return item;
+    });
+
+    setItems(newItems);
+    changeQuantity(id, quantity);
+  };
 
   const handleRemove = (id: number) => {
     setItems((prev) => prev?.filter((item) => item.id !== id));
@@ -66,7 +83,7 @@ const page = () => {
   return (
     <>
       <h1 className="text-xl lg:text-2xl text-center font-medium text-green-950 p-4 bg-green-200 ">
-        You have {items && items?.length} item(s) in Cart
+        You have {items?.length} item(s) in Cart
       </h1>
       <div className="container">
         <div className="grid grid-cols-1 lg:grid-cols-[75fr,25fr] gap-x-8 gap-y-2 p-2">
@@ -99,7 +116,10 @@ const page = () => {
                   </td>
                   <td>
                     <div className="flex flex-col  gap-2">
-                      <QuantityInput />
+                      <QuantityInput
+                        item={{ id: item.id, quantity: item.quantity }}
+                        updateChange={handleQuantityChange}
+                      />
                       <Button
                         variant={"link"}
                         className="hover:text-green-600"
@@ -116,38 +136,12 @@ const page = () => {
               ))}
             </tbody>
           </table>
-          <div className="text-white bg-green-600 p-2 flex flex-col justify-between h-max gap-2">
-            <div className="flex">
-              <Input
-                type="text"
-                placeholder="Enter promo code"
-                className="text-black"
-              />
-              <Button>Apply</Button>
-            </div>
-            <table>
-              <tbody>
-                <tr>
-                  <td>Subtotal:</td>
-                  <td className="text-right">0</td>
-                </tr>
-                <tr>
-                  <td>Tax:</td>
-                  <td className="text-right">7%</td>
-                </tr>
-                <tr>
-                  <td>Total</td>
-                  <td className="text-right">901</td>
-                </tr>
-              </tbody>
-            </table>
-            <Button
-              variant={"secondary"}
-              className="w-full uppercase font-medium text-lg "
-            >
-              Checkout
-            </Button>
-          </div>
+          <Subtotal
+            items={items?.map((item) => ({
+              price: item.price,
+              quantity: item.quantity,
+            }))}
+          />
         </div>
       </div>
     </>

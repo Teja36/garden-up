@@ -1,10 +1,23 @@
 "use client";
 
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import { Minus, Plus } from "lucide-react";
 
-const QuantityInput = () => {
-  const [quantity, setQuantity] = useState(1);
+type QuantityInputProps = {
+  item: {
+    id: number;
+    quantity: number;
+  };
+  updateChange: (productId: number, value: number) => void;
+};
+
+const QuantityInput = ({ item, updateChange }: QuantityInputProps) => {
+  const [quantity, setQuantity] = useState(item?.quantity || 1);
+
+  useEffect(() => {
+    if (!item) return;
+    updateChange(item.id, quantity);
+  }, [quantity]);
 
   const handleClick = (sign: string) => {
     if (isNaN(quantity)) {
