@@ -23,7 +23,7 @@ export const useCartStore = create<CartStore>()(persist(
                 const found = store.cart.find(item => item.id === product.id);
 
                 if (found) {
-                    found.quantity++;
+                    found.quantity += product.quantity ?? 1;
                     return { cart: [...store.cart.filter(item => item.id !== product.id), found] }
                 }
 

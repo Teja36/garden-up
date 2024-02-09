@@ -9,7 +9,7 @@ import Link from "next/link";
 
 import { Button } from "@/components/ui/button";
 
-import QuantityInput from "../products/[id]/QuantityInput";
+import QuantityInput from "@/components/QuantityInput";
 import Subtotal from "./Subtotal";
 
 import { ShoppingCart } from "lucide-react";

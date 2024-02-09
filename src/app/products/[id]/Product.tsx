@@ -2,8 +2,9 @@ import Image from "next/image";
 
 import Rating from "@/components/Rating";
 import ThisIsAGift from "./ThisIsAGift";
-import QuantityInput from "./QuantityInput";
+import QuantityInput from "../../../components/QuantityInput";
 import { Decimal } from "@prisma/client/runtime/library";
+import AddToCartWithQuantity from "../../../components/AddToCartWithQuantity";
 
 type ProductProps = {
   id: number;
@@ -64,16 +65,22 @@ const Product = ({
         )}
 
         <div className="flex justify-between gap-4 w-full">
-          <QuantityInput />
-          <button
-            disabled={stock < 1}
-            className="text-white bg-green-600 uppercase p-2 w-full rounded-sm hover:bg-green-700"
-          >
-            {stock > 0 ? "Add to cart" : "Out of Stock"}
-          </button>
+          {stock > 0 ? (
+            <AddToCartWithQuantity productId={id} />
+          ) : (
+            <>
+              <QuantityInput />
+              <button
+                disabled
+                className="text-white bg-green-300 uppercase p-2 w-full rounded-sm hover:bg-green-200 cursor-not-allowed"
+              >
+                Out of Stock
+              </button>
+            </>
+          )}
         </div>
 
-        {featured && (
+        {featured && stock > 1 && (
           <button className="text-white bg-green-600 uppercase p-2 w-full hover:bg-green-700">
             Buy It Now
           </button>

@@ -4,7 +4,7 @@ import { ChangeEvent, useEffect, useState } from "react";
 import { Minus, Plus } from "lucide-react";
 
 type QuantityInputProps = {
-  item: {
+  item?: {
     id: number;
     quantity: number;
   };
@@ -12,7 +12,7 @@ type QuantityInputProps = {
 };
 
 const QuantityInput = ({ item, updateChange }: QuantityInputProps) => {
-  const [quantity, setQuantity] = useState(item?.quantity || 1);
+  const [quantity, setQuantity] = useState(item?.quantity ?? 1);
 
   useEffect(() => {
     if (!item) return;
@@ -55,7 +55,7 @@ const QuantityInput = ({ item, updateChange }: QuantityInputProps) => {
         className="w-6 xs:w-12 text-center"
         value={quantity}
         min={1}
-        max={5}
+        max={10}
         onChange={handleChange}
       />
       <button

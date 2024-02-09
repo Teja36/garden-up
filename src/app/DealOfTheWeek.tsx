@@ -1,8 +1,8 @@
 import Image from "next/image";
 import Link from "next/link";
 import Rating from "@/components/Rating";
-import QuantityInput from "./products/[id]/QuantityInput";
 import { ArrowRight } from "lucide-react";
+import AddToCartWithQuantity from "@/components/AddToCartWithQuantity";
 
 const product = {
   id: 1,
@@ -55,13 +55,7 @@ const DealOfTheWeek = () => {
         </div>
 
         <div className="flex justify-between gap-4 w-full">
-          <QuantityInput />
-          <button
-            disabled={product.stock < 1}
-            className="text-white bg-green-600 uppercase p-2 w-full rounded-sm hover:bg-green-700"
-          >
-            {product.stock > 0 ? "Add to cart" : "Out of Stock"}
-          </button>
+          <AddToCartWithQuantity productId={product.id} />
         </div>
 
         <p className="text-lg text-gray-600 line-clamp-6">
