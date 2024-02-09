@@ -22,7 +22,7 @@ const SortByDropdown = ({ noOfProducts }: SortByDropdownProps) => {
   };
 
   return (
-    <div className="w-full p-2 flex justify-end items-center gap-3">
+    <div className="sticky top-0 z-10 w-full px-2 py-3 flex justify-end items-center gap-3 bg-white">
       <select
         onChange={handleSelectChange}
         name="sort-by"

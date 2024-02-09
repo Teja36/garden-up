@@ -37,14 +37,14 @@ const page = async ({
 
   return (
     <div className="container mt-2">
-      <div>
+      <div className=" px-10">
         <h1 className="text-4xl font-semibold capitalize">{collectionName}</h1>
         <p className="text-md mt-4">{description}</p>
       </div>
       <SortByDropdown noOfProducts={products.length} />
-      <div className="flex gap-4 justify-between sticky top-0">
+      <div className="flex gap-6 justify-between px-10">
         <FilterSidebar />
-        <div className="grid grid-cols-3 gap-2">
+        <div className="grid grid-cols-3 gap-8 w-3/4">
           {products.map((product) => (
             <ProductCard key={product.id} {...product} />
           ))}

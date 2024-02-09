@@ -35,7 +35,7 @@ const filters = [
 
 const FilterSidebar = () => {
   return (
-    <div className="w-80 h-min flex flex-col items-center justify-between bg-gray-50 rounded-md">
+    <div className="sticky top-2 z-30 w-80 h-min max-h-screen overflow-y-scroll flex flex-col items-center justify-between bg-gray-50 rounded-md">
       <div className="self-stretch flex justify-between p-4">
         <h4 className="text-md font-medium">Filter</h4>
         <button className="text-sm font-medium uppercase underline">
