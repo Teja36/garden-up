@@ -71,10 +71,20 @@ module.exports = {
           from: { height: "var(--radix-accordion-content-height)" },
           to: { height: 0 },
         },
+        "navbar-down": {
+          from: { transform: "translateY(-100px)" },
+          to: { transform: "translateY(0px)" },
+        },
+        "navbar-up": {
+          from: { transform: "translateY(0px)" },
+          to: { transform: "translateY(-100px)" },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
+        "navbar-down": "navbar-down 0.3s ease-out forwards",
+        "navbar-up": "navbar-up 0.3s ease-out forwards",
       },
     },
   },
