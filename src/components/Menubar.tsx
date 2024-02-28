@@ -47,8 +47,9 @@ const Menubar = () => {
       <Button
         variant={"link"}
         className="text-white uppercase tracking-widest hover:opacity-50"
+        asChild
       >
-        Blog
+        <Link href="/blogs">Blog</Link>
       </Button>
     </nav>
   );
