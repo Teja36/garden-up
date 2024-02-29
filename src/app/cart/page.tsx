@@ -18,7 +18,7 @@ type itemType = {
   id: number;
   name: string;
   imageUrl: string;
-  stock: boolean;
+  stock: number;
   price: number;
   discount: number;
   quantity: number;
@@ -65,6 +65,8 @@ const page = () => {
     setItems((prev) => prev?.filter((item) => item.id !== id));
     remove(id);
   };
+
+  if (!items) return <>Loading...</>;
 
   if (items && items?.length <= 0) {
     return (
