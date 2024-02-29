@@ -19,7 +19,7 @@ const Subtotal = ({ items }: SubtotalProps) => {
     items?.reduce((acc, cur) => acc + cur.price * cur.quantity, 0) ?? 0;
 
   return (
-    <div className="text-white bg-green-600 p-2 flex flex-col justify-between h-max gap-2">
+    <div className="sticky top-4 text-white bg-green-600 p-2 flex flex-col justify-between h-max gap-2">
       <div className="flex">
         <Input
           type="text"
