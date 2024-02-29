@@ -4,6 +4,7 @@ import Link from "next/link";
 import Rating from "./Rating";
 import { Decimal } from "@prisma/client/runtime/library";
 import AddToCartButton from "./AddToCartButton";
+import AddToWishlistButton from "./AddToWishlistButton";
 
 type ProductCardProps = {
   id: number;
@@ -25,7 +26,9 @@ const ProductCard = ({
   stock,
 }: ProductCardProps) => {
   return (
-    <div className="flex flex-col w-full gap-2 group">
+    <div className="relative flex flex-col w-full gap-2 group">
+      <AddToWishlistButton productId={id} />
+
       <Link href={`/products/${id}`}>
         <div className="relative w-full h-48 xs:h-96 overflow-hidden">
           <Image

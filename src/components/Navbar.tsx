@@ -20,8 +20,9 @@ const Navbar = () => {
       <div className="flex justify-between items-center gap-3">
         <SignInButton />
         <span className="flex justify-between items-center gap-1">
-          <p>Wishlist</p>
-          <Heart />
+          <Link href="/wishlist">
+            <Heart color="white" />
+          </Link>
         </span>
         <span className="relative">
           <Link href="/cart">
