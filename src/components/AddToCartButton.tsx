@@ -13,10 +13,10 @@ const AddToCartButton = ({ id, stock }: { id: number; stock: number }) => {
   return (
     <button
       disabled={stock === 0}
-      className="text-white uppercase bg-green-600 p-2 text-sm hover:bg-green-700 transition ease-in-out duration-100"
+      className="text-white uppercase bg-green-600 p-2 text-sm enabled:hover:bg-green-700 disabled:opacity-65  transition ease-in-out duration-100"
       onClick={handleClick}
     >
-      {stock > 0 ? "Add to Cart" : "Out of Stock"}
+      {stock > 0 ? "Add to Cart" : "Sold Out"}
     </button>
   );
 };
