@@ -3,7 +3,7 @@ import Rating from "@/components/Rating";
 import formatDate from "../../../../utils/formatDate";
 import prisma from "../../../../utils/db";
 import { Decimal } from "@prisma/client/runtime/library";
-import { postReview } from "@/server/actions";
+import { postReview } from "@/actions/reviews";
 import RatingInput from "@/components/RatingInput";
 
 const CustomerReviews = async ({ productId }: { productId: number }) => {

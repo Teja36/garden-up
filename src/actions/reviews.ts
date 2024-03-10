@@ -1,6 +1,7 @@
 "use server";
 
 import { getServerSession } from "next-auth";
+import { redirect } from "next/navigation";
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import prisma from "../../utils/db";
 
@@ -55,5 +56,7 @@ export async function postReview(productId: number, formData: FormData) {
             },
         },
     });
+
+    redirect(`/products/${productId}`, 'replace');
 
 }
