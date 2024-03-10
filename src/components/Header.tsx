@@ -1,6 +1,7 @@
 "use client";
 import { ReactNode, useEffect, useRef, useState } from "react";
 import { cn } from "@/lib/utils";
+import throttle from "../../utils/throttle";
 
 const Header = ({ children }: { children: ReactNode }) => {
   const [isVisible, setIsVisible] = useState(false);
@@ -15,7 +16,7 @@ const Header = ({ children }: { children: ReactNode }) => {
     };
   }, []);
 
-  const listenToScroll = () => {
+  const listenToScroll = throttle(() => {
     let currentScroll =
       document.documentElement.scrollTop || document.body.scrollTop; // Get Current Scroll Value
 
@@ -26,9 +27,8 @@ const Header = ({ children }: { children: ReactNode }) => {
       lastScroll.current = currentScroll;
       setIsVisible(true);
     }
+  }, 100);
 
-    console.log(lastScroll.current);
-  };
   return (
     <header
       className={cn("relative w-full flex flex-col bg-green-600 mx-auto z-50", {
