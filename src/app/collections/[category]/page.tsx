@@ -1,8 +1,15 @@
+import {
+  HydrationBoundary,
+  QueryClient,
+  dehydrate,
+} from "@tanstack/react-query";
+
 import prisma from "../../../../utils/db";
 
-import ProductCard from "@/components/ProductCard";
 import FilterSidebar from "./FilterSidebar";
 import SortByDropdown from "../../../components/SortByDropdown";
+import InfiniteProducts from "./InfiniteProducts";
+import { getProducts } from "@/actions/products";
 
 const page = async ({
   params,
@@ -14,41 +21,42 @@ const page = async ({
   const collectionName = params.category;
   const sortBy = searchParams["sort-by"];
 
-  const { description } = await prisma.collection.findFirst({
+  const result = await prisma.collection.findFirst({
     where: {
       name: collectionName,
     },
+    select: {
+      description: true,
+    },
   });
 
-  const products = await prisma.product.findMany({
-    where: {
-      ...(sortBy === "featured" && { featured: true }),
-      category: {
-        collection: {
-          name: collectionName,
-        },
-      },
-    },
-    ...((sortBy === "asc" || sortBy === "desc") && {
-      orderBy: { name: sortBy },
-    }),
-    // take: 9,
+  const get = async () => {
+    const products = await getProducts(sortBy, collectionName);
+    return products;
+  };
+
+  const queryClient = new QueryClient();
+
+  await queryClient.prefetchQuery({
+    queryKey: ["products", { sortBy, collectionName, skip: 0 }],
+    queryFn: get,
   });
 
   return (
     <div className="container mt-2">
       <div className=" px-10">
         <h1 className="text-4xl font-semibold capitalize">{collectionName}</h1>
-        <p className="text-md mt-4">{description}</p>
+        <p className="text-md mt-4">{result?.description}</p>
       </div>
-      <SortByDropdown noOfProducts={products.length} />
+
+      <SortByDropdown noOfProducts={5} />
+
       <div className="flex gap-6 justify-between px-10">
         <FilterSidebar />
-        <div className="grid grid-cols-3 gap-8 w-3/4">
-          {products.map((product) => (
-            <ProductCard key={product.id} {...product} />
-          ))}
-        </div>
+
+        <HydrationBoundary state={dehydrate(queryClient)}>
+          <InfiniteProducts sortBy={sortBy} collectionName={collectionName} />
+        </HydrationBoundary>
       </div>
     </div>
   );
