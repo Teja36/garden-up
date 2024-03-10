@@ -1,7 +1,7 @@
 "use client";
 
 import { useCartStore } from "@/store/cart";
-import useStore from "../../utils/useStore";
+import useStore from "../hooks/utils/useStore";
 
 const CartItemCountIndicator = () => {
   const count = useStore(useCartStore, (state) => state.cart.length);
