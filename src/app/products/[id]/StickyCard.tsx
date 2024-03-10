@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useState } from "react";
+
 import Image from "next/image";
 
 type StickyCardProps = {
@@ -7,33 +7,20 @@ type StickyCardProps = {
   imageUrl: string | null;
   price: number;
   discount: number | null;
+  inView: boolean;
 };
 
-const StickyCard = ({ name, imageUrl, price, discount }: StickyCardProps) => {
-  const [isVisible, setIsVisible] = useState(false);
-
-  useEffect(() => {
-    window.addEventListener("scroll", listenToScroll);
-
-    return () => {
-      window.removeEventListener("scroll", listenToScroll);
-    };
-  }, []);
-
-  const listenToScroll = () => {
-    let hieghtToHideFrom = 600;
-
-    const winScroll =
-      document.body.scrollTop || document.documentElement.scrollTop;
-
-    if (winScroll > hieghtToHideFrom) setIsVisible(true);
-    else setIsVisible(false);
-  };
-
+const StickyCard = ({
+  name,
+  imageUrl,
+  price,
+  discount,
+  inView,
+}: StickyCardProps) => {
   return (
     <div
-      className="w-full h-20 p-10 fixed left-0 bg-white flex items-center gap-4 shadow-[0_-6px_50px_-12px_rgba(0,0,0,0.3)] transition-all delay-75 "
-      style={{ bottom: isVisible ? "0px" : "-80px" }}
+      className="w-full h-20 p-10 fixed left-0 z-50 bg-white flex items-center gap-4 shadow-[0_-6px_50px_-12px_rgba(0,0,0,0.3)] transition-all delay-75 "
+      style={{ bottom: !inView ? "0px" : "-80px" }}
     >
       <Image
         src={imageUrl || "/Plant.jpg"}
@@ -54,7 +41,7 @@ const StickyCard = ({ name, imageUrl, price, discount }: StickyCardProps) => {
                 ₹{price}
               </span>
               <span className="text-lg font-medium text-green-600 ml-2">
-                ₹{price}
+                ₹{Math.round(price - (price / 100) * discount)}
               </span>
             </>
           ) : (

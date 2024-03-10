@@ -3,7 +3,6 @@ import prisma from "../../../../utils/db";
 import CustomerReviews from "./CustomerReviews";
 import Product from "./Product";
 import Recommended from "./Recommended";
-import StickyCard from "./StickyCard";
 
 const page = async ({ params }: { params: { id: string } }) => {
   const productData = await prisma.product.findUnique({
@@ -19,12 +18,6 @@ const page = async ({ params }: { params: { id: string } }) => {
           <Product {...productData} />
           <Recommended categoryId={productData?.categoryId} />
           <CustomerReviews productId={productData.id} />
-          <StickyCard
-            discount={productData.discount}
-            imageUrl={productData.imageUrl}
-            name={productData.name}
-            price={productData.price}
-          />
         </>
       )}
     </div>
