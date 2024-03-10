@@ -1,22 +1,29 @@
 "use client";
 
 import Image from "next/image";
+import { useCartStore } from "@/store/cart";
 
 type StickyCardProps = {
+  id: number;
   name: string;
   imageUrl: string | null;
   price: number;
   discount: number | null;
+  stock: number;
   inView: boolean;
 };
 
 const StickyCard = ({
+  id,
   name,
   imageUrl,
   price,
   discount,
+  stock,
   inView,
 }: StickyCardProps) => {
+  const addToCart = useCartStore((state) => state.add);
+
   return (
     <div
       className="w-full h-20 p-10 fixed left-0 z-50 bg-white flex items-center gap-4 shadow-[0_-6px_50px_-12px_rgba(0,0,0,0.3)] transition-all delay-75 "
@@ -49,8 +56,12 @@ const StickyCard = ({
           )}
         </div>
       </div>
-      <button className="text-white text-xs font-medium tracking-widest uppercase bg-green-600 w-44 h-10 rounded-sm ml-auto hover:bg-green-700">
-        Add to cart
+      <button
+        disabled={stock === 0}
+        onClick={() => addToCart({ id, quantity: 1 })}
+        className="text-white text-xs font-medium tracking-widest uppercase bg-green-600 w-44 h-10 rounded-sm ml-auto enabled:hover:bg-green-700 disabled:opacity-65"
+      >
+        {stock > 0 ? "Add to Cart" : "Out of Stock"}
       </button>
     </div>
   );

@@ -151,10 +151,12 @@ const Product = ({
       </div>
 
       <StickyCard
+        id={id}
         discount={discount}
         imageUrl={imageUrl}
         name={name}
         price={price}
+        stock={stock}
         inView={inView}
       />
     </>
