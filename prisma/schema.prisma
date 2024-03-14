@@ -76,6 +76,7 @@ model User {
   email         String?   @unique
   emailVerified DateTime?
   image         String?
+  passwordHash  String?
   reviews       Review[]
   accounts      Account[]
   sessions      Session[]
