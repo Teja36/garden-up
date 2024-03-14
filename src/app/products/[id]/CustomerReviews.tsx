@@ -155,16 +155,19 @@ const CustomerReviews = async ({ productId }: { productId: number }) => {
       {reviews.map(({ id, rating, createdAt, title, description, user }) => (
         <div className="py-4 border-t border-gray-200" key={id}>
           <div className="flex gap-2">
-            {/* <div className="w-12 h-12 flex justify-center items-center bg-gray-200 rounded-full">
-              <span className="text-sm">{name.charAt(0)}</span>
-            </div> */}
-            <Image
-              src={user.image!}
-              alt={user.name!}
-              width={48}
-              height={48}
-              className="object-cover rounded-full"
-            />
+            {user.image ? (
+              <Image
+                src={user.image!}
+                alt={user.name!}
+                width={48}
+                height={48}
+                className="object-cover rounded-full"
+              />
+            ) : (
+              <div className="w-12 h-12 flex justify-center items-center bg-gray-200 rounded-full">
+                <span className="text-sm">{user.name?.charAt(0)}</span>
+              </div>
+            )}
 
             <div className="flex flex-col">
               <span className="flex">
