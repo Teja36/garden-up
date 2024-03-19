@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { createPortal } from "react-dom";
 import { signIn } from "next-auth/react";
 import Link from "next/link";
 import { useForm } from "react-hook-form";
@@ -28,7 +29,7 @@ const registerFormSchema = z.object({
 const SignInModal = ({ closeModal }: { closeModal: () => void }) => {
   const [isRegister, setIsRegister] = useState(false);
 
-  return (
+  return createPortal(
     <dialog className="fixed left-0 top-0 w-full h-full bg-black bg-opacity-50 z-50 overflow-auto backdrop-brightness-50 flex justify-center items-center">
       <div className="relative max-w-96 mx-auto my-4 flex flex-col bg-white p-12 rounded-xl ">
         <p className="text-center">Garden Up - Logo</p>
@@ -108,7 +109,8 @@ const SignInModal = ({ closeModal }: { closeModal: () => void }) => {
           </p>
         )}
       </div>
-    </dialog>
+    </dialog>,
+    document.querySelector("#modal-container") as Element
   );
 };
 

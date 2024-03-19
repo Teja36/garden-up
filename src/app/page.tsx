@@ -7,17 +7,20 @@ import WhyGardenUp from "./WhyGardenUp";
 
 export default function Home() {
   return (
-    <main>
-      <OfferCarousel />
+    <>
+      <div id="modal-container"></div>
+      <main>
+        <OfferCarousel />
 
-      <div className="container">
-        <QuickBrowse />
-        <BestSellers />
-        <NewArrivals />
-        <DealOfTheWeek />
-      </div>
+        <div className="container">
+          <QuickBrowse />
+          <BestSellers />
+          <NewArrivals />
+          <DealOfTheWeek />
+        </div>
 
-      <WhyGardenUp />
-    </main>
+        <WhyGardenUp />
+      </main>
+    </>
   );
 }
