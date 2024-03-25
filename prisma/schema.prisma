@@ -12,11 +12,12 @@ datasource db {
 }
 
 model Collection {
-  id          Int        @id @default(autoincrement())
-  name        String
-  description String
-  imageUrl    String
-  categories  Category[]
+  id             Int         @id @default(autoincrement())
+  name           String
+  description    String
+  imageUrl       String
+  categories     Category[]
+  attributeTypes Attribute[]
 }
 
 model Category {
@@ -28,19 +29,20 @@ model Category {
 }
 
 model Product {
-  id          Int      @id @default(autoincrement())
+  id          Int              @id @default(autoincrement())
   name        String
   description String
-  createdAt   DateTime @default(now())
+  createdAt   DateTime         @default(now())
   price       Float
   stock       Int
   imageUrl    String?
-  featured    Boolean? @default(false)
+  featured    Boolean?         @default(false)
   discount    Float?
   categoryId  Int
-  category    Category @relation(fields: [categoryId], references: [id])
-  rating      Decimal? @default(0) @db.Decimal(2, 1)
+  category    Category         @relation(fields: [categoryId], references: [id])
+  rating      Decimal?         @default(0) @db.Decimal(2, 1)
   reviews     Review[]
+  attributes  AttributeValue[]
 }
 
 model Account {
@@ -92,4 +94,20 @@ model Review {
   user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
   productId   Int
   product     Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+}
+
+model Attribute {
+  id           Int              @id @default(autoincrement())
+  name         String
+  collectionId Int
+  collection   Collection       @relation(fields: [collectionId], references: [id], onDelete: Cascade)
+  values       AttributeValue[]
+}
+
+model AttributeValue {
+  id          Int       @id @default(autoincrement())
+  value       String
+  attribute   Attribute @relation(fields: [attributeId], references: [id])
+  attributeId Int
+  product     Product[]
 }
