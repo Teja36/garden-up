@@ -9,14 +9,17 @@ import { useInView } from "react-intersection-observer";
 
 const InfiniteProducts = ({
   sortBy,
+  filters,
   collectionName,
 }: {
   sortBy: string | string[] | undefined;
+  filters: string | string[] | undefined;
   collectionName: string;
 }) => {
   const get = async (queryFunctionContext: QueryFunctionContext) => {
     const products = await getProducts(
       sortBy,
+      filters,
       collectionName,
       queryFunctionContext?.pageParam
     );
@@ -32,7 +35,7 @@ const InfiniteProducts = ({
     isFetchingNextPage,
     status,
   } = useInfiniteQuery({
-    queryKey: ["products", { sortBy, collectionName }],
+    queryKey: ["products", { sortBy, filters, collectionName }],
     queryFn: get,
     initialPageParam: 0,
     getNextPageParam: (lastPage, pages) =>

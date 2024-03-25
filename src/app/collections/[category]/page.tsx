@@ -20,18 +20,20 @@ const page = async ({
 }) => {
   const collectionName = params.category;
   const sortBy = searchParams["sort-by"];
+  const filters = searchParams["custom.filter"];
 
   const result = await prisma.collection.findFirst({
     where: {
       name: collectionName,
     },
     select: {
+      id: true,
       description: true,
     },
   });
 
   const get = async () => {
-    const products = await getProducts(sortBy, collectionName);
+    const products = await getProducts(sortBy, filters, collectionName);
     return products;
   };
 
@@ -52,10 +54,14 @@ const page = async ({
       <SortByDropdown noOfProducts={5} />
 
       <div className="flex gap-6 justify-between px-10">
-        <FilterSidebar />
+        <FilterSidebar collectionId={result?.id as number} />
 
         <HydrationBoundary state={dehydrate(queryClient)}>
-          <InfiniteProducts sortBy={sortBy} collectionName={collectionName} />
+          <InfiniteProducts
+            sortBy={sortBy}
+            filters={filters}
+            collectionName={collectionName}
+          />
         </HydrationBoundary>
       </div>
     </div>
