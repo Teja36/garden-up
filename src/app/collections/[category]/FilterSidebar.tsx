@@ -117,17 +117,26 @@ const FilterSidebar = async ({ collectionId }: { collectionId: number }) => {
             </div>
           </summary>
           <ul className="flex flex-col ml-5 mt-4">
-            {list.map(({ id, value, _count: { product: productCount } }) => (
-              <li key={id} className="flex p-3 border-b border-gray-300">
-                <FilterSidebarInput value={value} attributeId={id} />
-                <label
-                  htmlFor={value}
-                  className="text-sm font-normal cursor-pointer ml-2"
-                >
-                  {value} ({productCount})
-                </label>
-              </li>
-            ))}
+            {list.map(
+              ({
+                id,
+                value: attributeValue,
+                _count: { product: productCount },
+              }) => (
+                <li key={id} className="flex p-3 border-b border-gray-300">
+                  <FilterSidebarInput
+                    attributeValue={attributeValue}
+                    attributeId={id}
+                  />
+                  <label
+                    htmlFor={attributeValue}
+                    className="text-sm font-normal cursor-pointer ml-2"
+                  >
+                    {attributeValue} ({productCount})
+                  </label>
+                </li>
+              )
+            )}
           </ul>
         </details>
       ))}
