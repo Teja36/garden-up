@@ -2,7 +2,13 @@
 
 import prisma from "../../utils/db";
 
-export const getProducts = async (sortBy: string | string[] | undefined, filters: string | string[] | undefined, collectionName: string, pageParam = 0) => {
+export const getProducts = async (searchParams: { [key: string]: string | string[] | undefined }, collectionName: string, pageParam = 0) => {
+
+    const sortBy = searchParams["sort-by"];
+    const filters = searchParams["custom.filter"];
+    const minPrice = Number(searchParams["min.price"]);
+    const maxPrice = Number(searchParams["max.price"]);
+
     let attributeIDs: number[] = [];
 
     if (filters) {
@@ -23,6 +29,12 @@ export const getProducts = async (sortBy: string | string[] | undefined, filters
                     },
                 },
             }),
+
+            price: {
+                ...(!isNaN(minPrice) && { gte: minPrice }),
+                ...(!isNaN(maxPrice) && { lte: maxPrice }),
+            },
+
             category: {
                 collection: {
                     name: collectionName,

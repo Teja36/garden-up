@@ -1,6 +1,7 @@
 import prisma from "../../../../utils/db";
 import ClearAllFiltersButton from "./ClearAllFiltersButton";
 import FilterSidebarInput from "./FilterSidebarInput";
+import PriceFilterInput from "./PriceFilterInput";
 
 const FilterSidebar = async ({ collectionId }: { collectionId: number }) => {
   const filters = await prisma.attribute.findMany({
@@ -68,10 +69,9 @@ const FilterSidebar = async ({ collectionId }: { collectionId: number }) => {
             </svg>
           </div>
         </summary>
-        <ul className="flex flex-col ml-5 mt-4">
-          <li className="flex p-3 ">
-            <label htmlFor="price">Price</label>
-            <input type="range" min={0} max={1000} />
+        <ul className="flex flex-col ml-3 mt-4">
+          <li className="flex flex-col p-3 ">
+            <PriceFilterInput />
           </li>
         </ul>
       </details>

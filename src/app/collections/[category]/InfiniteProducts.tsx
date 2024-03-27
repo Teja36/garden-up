@@ -8,18 +8,15 @@ import ProductCard from "@/components/ProductCard";
 import { useInView } from "react-intersection-observer";
 
 const InfiniteProducts = ({
-  sortBy,
-  filters,
+  searchParams,
   collectionName,
 }: {
-  sortBy: string | string[] | undefined;
-  filters: string | string[] | undefined;
+  searchParams: { [key: string]: string | string[] | undefined };
   collectionName: string;
 }) => {
   const get = async (queryFunctionContext: QueryFunctionContext) => {
     const products = await getProducts(
-      sortBy,
-      filters,
+      searchParams,
       collectionName,
       queryFunctionContext?.pageParam
     );
@@ -35,7 +32,7 @@ const InfiniteProducts = ({
     isFetchingNextPage,
     status,
   } = useInfiniteQuery({
-    queryKey: ["products", { sortBy, filters, collectionName }],
+    queryKey: ["products", { ...searchParams, collectionName }],
     queryFn: get,
     initialPageParam: 0,
     getNextPageParam: (lastPage, pages) =>

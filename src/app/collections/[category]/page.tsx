@@ -19,8 +19,6 @@ const page = async ({
   searchParams: { [key: string]: string | string[] | undefined };
 }) => {
   const collectionName = params.category;
-  const sortBy = searchParams["sort-by"];
-  const filters = searchParams["custom.filter"];
 
   const result = await prisma.collection.findFirst({
     where: {
@@ -33,14 +31,14 @@ const page = async ({
   });
 
   const get = async () => {
-    const products = await getProducts(sortBy, filters, collectionName);
+    const products = await getProducts(searchParams, collectionName);
     return products;
   };
 
   const queryClient = new QueryClient();
 
   await queryClient.prefetchQuery({
-    queryKey: ["products", { sortBy, collectionName, skip: 0 }],
+    queryKey: ["products", { ...searchParams, collectionName, skip: 0 }],
     queryFn: get,
   });
 
@@ -58,8 +56,7 @@ const page = async ({
 
         <HydrationBoundary state={dehydrate(queryClient)}>
           <InfiniteProducts
-            sortBy={sortBy}
-            filters={filters}
+            searchParams={searchParams}
             collectionName={collectionName}
           />
         </HydrationBoundary>
