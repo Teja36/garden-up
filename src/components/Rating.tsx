@@ -29,14 +29,17 @@ const Rating = ({ rating, size = 18 }: RatingProps) => {
         </span>
       ))}
       {fractional >= 5 && (
-        <span className=" text-yellow-400">
-          {/* <Star className="w-5 h-5  absolute top-0 left-0" /> */}
-          <StarHalf size={size} className="fill-yellow-400 " />
+        <span className="relative text-yellow-400">
+          <StarHalf
+            size={size}
+            className="absolute top-0 left-0 fill-yellow-400"
+          />
+          <Star size={size} />
         </span>
       )}
       {[...Array(dullStars)].map((_, index) => (
         <span key={index} className="text-yellow-400">
-          <Star size={size} className="" />
+          <Star size={size} />
         </span>
       ))}
       {/* {integer}.{fractional || 0} */}
