@@ -49,7 +49,7 @@ const page = async ({
         <h1 className="text-2xl md:text-4xl font-semibold capitalize">
           {collectionName}
         </h1>
-        <p className="text-sm md:text-md mt-4">{result?.description}</p>
+        <p className="text-sm md:text-base mt-4">{result?.description}</p>
       </div>
 
       <div className="md:hidden my-8">
