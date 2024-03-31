@@ -54,7 +54,7 @@ const InfiniteProducts = ({
   if (status === "error") return `Something went wrong ${error}`;
 
   return (
-    <div className="grid grid-cols-3 gap-8 w-3/4">
+    <div className="grid grid-cols-2 xl:grid-cols-3 gap-4 md:gap-8">
       {data?.pages.map((products, i) => (
         <React.Fragment key={i}>
           {products?.map((product) => (

@@ -30,7 +30,7 @@ const ProductCard = ({
       <AddToWishlistButton productId={id} />
 
       <Link href={`/products/${id}`}>
-        <div className="relative w-full h-48 xs:h-96 overflow-hidden">
+        <div className="relative w-full aspect-[4/5] overflow-hidden">
           <Image
             src={imageUrl ?? ""}
             alt="plant"

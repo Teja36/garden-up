@@ -1,12 +1,10 @@
 "use client";
+
+import { ChangeEvent } from "react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import React, { ChangeEvent } from "react";
+import { cn } from "@/lib/utils";
 
-type SortByDropdownProps = {
-  noOfProducts?: number;
-};
-
-const SortByDropdown = ({ noOfProducts }: SortByDropdownProps) => {
+const SortByDropdown = ({ isMobile = false }: { isMobile?: boolean }) => {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
@@ -16,54 +14,42 @@ const SortByDropdown = ({ noOfProducts }: SortByDropdownProps) => {
   const handleSelectChange = (e: ChangeEvent<HTMLSelectElement>) => {
     const val = e.target.value;
 
-    if (newSearchParams.has("sort-by")) newSearchParams.delete("sort-by");
+    if (e.target.value === "") {
+      newSearchParams.delete("sort-by");
+      router.replace(`${pathname}?${newSearchParams.toString()}`);
+      return;
+    }
 
-    router.replace(`${pathname}?sort-by=${val}&${newSearchParams.toString()}`);
+    newSearchParams.set("sort-by", val);
+    router.replace(`${pathname}?${newSearchParams.toString()}`);
   };
 
   return (
-    <div className="sticky top-0 z-10 w-full px-2 py-3 flex justify-end items-center gap-3 bg-white">
-      <select
-        onChange={handleSelectChange}
-        name="sort-by"
-        id=""
-        className="uppercase text-green-600 border-2 border-green-700 bg-white p-2"
-      >
-        <option value="">Sort By</option>
-        <option value="bs" className="text-sm capitalize p-2">
-          Best Selling
-        </option>
-        <option value="featured" className="text-sm capitalize p-2">
-          Featured
-        </option>
-        <option value="asc" className="text-sm capitalize p-2">
-          Alphabetical A-Z
-        </option>
-        <option value="desc" className="text-sm capitalize p-2">
-          Alphabetical Z-A
-        </option>
-      </select>
-
-      {/* <details className="border border-black">
-      <summary className="uppercase text-green-600 border-2 border-green-700 p-2">
-        Sort by
-      </summary>
-      <ul>
-        <li className="p-2">
-          <label htmlFor="">Best Selling</label>
-        </li>
-        <li className="p-2">
-          <label htmlFor="">Best Selling</label>
-        </li>
-        <li className="p-2">
-          <label htmlFor="">Best Selling</label>
-        </li>
-      </ul>
-    </details> */}
-      {noOfProducts && (
-        <p className="text-sm text-gray-400">{noOfProducts} products</p>
+    <select
+      onChange={handleSelectChange}
+      name="sort-by"
+      id=""
+      className={cn(
+        "uppercase text-green-600 border-2 border-green-700 bg-white p-2",
+        {
+          "flex-1": isMobile,
+        }
       )}
-    </div>
+    >
+      <option value="">Sort By</option>
+      <option value="bs" className="text-sm capitalize p-2">
+        Best Selling
+      </option>
+      <option value="featured" className="text-sm capitalize p-2">
+        Featured
+      </option>
+      <option value="asc" className="text-sm capitalize p-2">
+        Alphabetical A-Z
+      </option>
+      <option value="desc" className="text-sm capitalize p-2">
+        Alphabetical Z-A
+      </option>
+    </select>
   );
 };
 
