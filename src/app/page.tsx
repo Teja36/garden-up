@@ -19,6 +19,10 @@ export default function Home() {
       </div>
 
       <WhyGardenUp />
+
+      <div className="container">
+        <TopReviews />
+      </div>
     </>
   );
 }
