@@ -28,7 +28,8 @@ export default function RootLayout({
             <Header>
               <Navbar />
             </Header>
-            {children}
+            <div id="modal-container"></div>
+            <main>{children}</main>
             <Footer />
           </AuthProvider>
         </Providers>
