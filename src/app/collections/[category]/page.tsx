@@ -61,7 +61,7 @@ const page = async ({
         <p className="text-sm text-gray-400 mt-4">20 products</p>
       </div>
 
-      <div className="hidden md:flex sticky top-0 z-10 w-full px-2 py-3 justify-end items-center gap-3 bg-white">
+      <div className="hidden md:flex sticky top-0 z-20 w-full px-2 py-3 justify-end items-center gap-3 bg-white">
         <SortByDropdown />
         <p className="text-sm text-gray-400">20 products</p>
       </div>
