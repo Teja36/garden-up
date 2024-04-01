@@ -29,10 +29,10 @@ const AddToWishlistButton = ({ productId }: AddToWishlistButtonProps) => {
   return (
     <button
       onClick={handleClick}
-      className="absolute top-0 right-0 opacity-0 group-hover:opacity-100 sm:p-2 transition-[opacity] ease z-10"
+      className="absolute top-0 right-0 lg:opacity-0 lg:group-hover:opacity-100 p-1 sm:p-2 transition-[opacity] ease z-10"
     >
       <Heart
-        className="w-4 sm:w-8"
+        className="w-5 h-5 xs:w-6 xs:h-6"
         color="red"
         {...(active && { fill: "red" })}
       />

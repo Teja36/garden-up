@@ -35,7 +35,7 @@ const ProductCard = ({
             src={imageUrl ?? ""}
             alt="plant"
             fill={true}
-            className="object-cover group-hover:scale-105 transition ease-linear duration-300 animate-fade-in"
+            className="object-cover lg:group-hover:scale-105 transition ease-linear duration-300 animate-fade-in"
           />
           {discount && (
             <span className="absolute top-1 left-1 sm:top-2 sm:left-2  text-green-900 font-medium bg-yellow-400 text-xs sm:text-sm px-1 py-[2px] sm:px-2 sm:py-1 uppercase rounded-sm">
