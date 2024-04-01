@@ -50,9 +50,20 @@ export const getProducts = async (searchParams: { [key: string]: string | string
             discount: true,
             stock: true,
         },
-        ...((sortBy === "asc" || sortBy === "desc") && {
-            orderBy: { name: sortBy },
+        ...(sortBy === "name-asc" && {
+            orderBy: { name: "asc" },
         }),
+        ...(sortBy === "name-desc" && {
+            orderBy: { name: "desc" },
+        }),
+        ...(sortBy === "price-asc" && {
+            orderBy: { price: "asc" },
+        }),
+        ...(sortBy === "price-desc" && {
+            orderBy: { price: "desc" },
+        }),
+        ...(sortBy === "date-desc" && { orderBy: { createdAt: "desc" } }),
+        ...(sortBy === "date-asc" && { orderBy: { createdAt: "asc" } }),
         take: 9,
         skip: pageParam * 9,
     });
