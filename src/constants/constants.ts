@@ -108,32 +108,32 @@ export const MENU_ITEMS: { title: string; href: string, content: { title: string
 export const QUICK_BROWSE: { title: string, href: string, img: string }[] = [
   {
     title: "Bestsellers",
-    href: "/",
-    img: "/Plant.jpg",
+    href: `${BASE_URL}/plants?sort-by=bs`,
+    img: "https://res.cloudinary.com/garden-up/image/upload/v1714595005/assets/BestSelling_p2ii5q.jpg",
   },
   {
     title: "Easy to Care",
-    href: "/",
-    img: "/Plant.jpg",
+    href: `${BASE_URL}/plants?custom.filter=37`,
+    img: "https://res.cloudinary.com/garden-up/image/upload/v1714594539/assets/EasyToCare_sehpmh.jpg",
   },
   {
     title: "XL Plants",
-    href: "/",
-    img: "/Plant.jpg",
+    href: `${BASE_URL}/plants?custom.filter=36`,
+    img: "https://res.cloudinary.com/garden-up/image/upload/v1714594660/assets/XLPlants_rr5jod.jpg",
   },
   {
     title: "Ceramic Pots",
-    href: "/",
-    img: "/Plant.jpg",
+    href: `${BASE_URL}/ceramic-pots`,
+    img: "https://res.cloudinary.com/garden-up/image/upload/v1714594729/assets/CeramicPots_tollhv.jpg",
   },
   {
     title: "Vegitable Seeds",
-    href: "/",
-    img: "/Plant.jpg",
+    href: `${BASE_URL}/vegetable-seeds`,
+    img: "https://res.cloudinary.com/garden-up/image/upload/v1714594690/assets/VegitableSeeds_agv9s8.jpg",
   },
   {
     title: "Fertilizers",
-    href: "/",
-    img: "/Plant.jpg",
+    href: `${BASE_URL}/potting-mix-and-fertilizers`,
+    img: "https://res.cloudinary.com/garden-up/image/upload/v1714595289/assets/Fertilizers_oj2lnc.jpg",
   },
 ]
