@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
-import useDebounce from "../../utils/useDebounce";
+import useDebounce from "../hooks/useDebounce";
 import { Input } from "./ui/input";
 import { Search } from "lucide-react";
 
@@ -31,10 +31,6 @@ const SearchInput = () => {
         className="focus-visible:ring-0 pr-8"
         value={text}
         onChange={(e) => {
-          if (e.target.value === "") {
-            router.back();
-            return;
-          }
           setText(e.target.value);
         }}
       />
