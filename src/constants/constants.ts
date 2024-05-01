@@ -1,3 +1,5 @@
+export const PAGE_SIZE = 6;
+
 export const MENU_ITEMS: { title: string; href: string, content: { title: string, href: string }[] }[] = [
   {
     title: "Plants",

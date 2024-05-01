@@ -6,6 +6,7 @@ import { QueryFunctionContext, useInfiniteQuery } from "@tanstack/react-query";
 import { getProducts } from "@/actions/products";
 import ProductCard from "@/components/ProductCard";
 import { useInView } from "react-intersection-observer";
+import { PAGE_SIZE } from "@/constants/constants";
 
 const InfiniteProducts = ({
   searchParams,
@@ -36,7 +37,7 @@ const InfiniteProducts = ({
     queryFn: get,
     initialPageParam: 0,
     getNextPageParam: (lastPage, pages) =>
-      lastPage.length === 9 ? pages.length : null,
+      lastPage.length === PAGE_SIZE ? pages.length : null,
   });
 
   const { ref, inView } = useInView();

@@ -1,6 +1,7 @@
 "use server";
 
 import prisma from "../../utils/db";
+import { PAGE_SIZE } from "@/constants/constants";
 
 export const getProducts = async (searchParams: { [key: string]: string | string[] | undefined }, collectionName: string, pageParam = 0) => {
 
@@ -64,8 +65,8 @@ export const getProducts = async (searchParams: { [key: string]: string | string
         }),
         ...(sortBy === "date-desc" && { orderBy: { createdAt: "desc" } }),
         ...(sortBy === "date-asc" && { orderBy: { createdAt: "asc" } }),
-        take: 9,
-        skip: pageParam * 9,
+        take: PAGE_SIZE,
+        skip: pageParam * PAGE_SIZE,
     });
 
     return products.map(product => ({ ...product, rating: product.rating?.toNumber() ?? 0 }));
