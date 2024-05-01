@@ -20,8 +20,8 @@ const DealOfTheWeek = async () => {
   if (!product) return <>Loading...</>;
 
   return (
-    <div className="grid grid-cols-2 gap-10 mt-12">
-      <div className="relative h-screen w-full">
+    <div className="grid grid-cols-1 md:grid-cols-2 md:gap-10 mt-12">
+      <div className="relative aspect-square w-full">
         <Image
           src={product?.imageUrl ?? ""}
           alt={product.name}
@@ -29,8 +29,8 @@ const DealOfTheWeek = async () => {
           className="object-cover"
         />
       </div>
-      <div className="flex flex-col gap-4 p-2">
-        <h2 className="font-medium text-2xl mt-12">Deal of the Week</h2>
+      <div className="flex flex-col gap-2 md:gap-4 p-2">
+        <h2 className="font-medium text-2xl mt-4 md:mt-12">Deal of the Week</h2>
 
         <h1 className="text-green-700 font-medium text-3xl">{product.name}</h1>
 
