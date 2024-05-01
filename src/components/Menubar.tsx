@@ -23,7 +23,7 @@ const Menubar = () => {
                   asChild
                   className="text-white uppercase tracking-widest hover:opacity-50"
                 >
-                  <span>{menuItem.title}</span>
+                  <Link href={menuItem.href}>{menuItem.title}</Link>
                 </Button>
               </NavigationMenuTrigger>
               <NavigationMenuContent className="absolute">

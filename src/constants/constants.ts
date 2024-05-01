@@ -1,73 +1,75 @@
+const BASE_URL = "/collections";
+
 export const PAGE_SIZE = 6;
 
 export const MENU_ITEMS: { title: string; href: string, content: { title: string, href: string }[] }[] = [
   {
     title: "Plants",
-    href: "/docs/primitives/alert-dialog",
+    href: `${BASE_URL}/plants`,
     content: [
       {
         title: "Flowering Plants",
-        href: "/",
+        href: `${BASE_URL}/flowering-plants`,
       },
       {
         title: "Fruit Plants",
-        href: "/",
+        href: `${BASE_URL}/fruit-plants`,
       },
       {
         title: "Low Maintenance Plants",
-        href: "/",
+        href: `${BASE_URL}/low-maintenance-plants`,
       },
       {
         title: "Air Purifying Plants",
-        href: "/",
+        href: `${BASE_URL}/air-purifying-plants`,
       },
       {
         title: "Low Light Plants",
-        href: "/",
+        href: `${BASE_URL}/low-light-plants`,
       },
       {
         title: "Cacti & Succulent Plants",
-        href: "/",
+        href: `${BASE_URL}/cacti-&-succulent-plants`,
       },
     ],
   },
   {
     title: "Seeds",
-    href: "/docs/primitives/hover-card",
+    href: `${BASE_URL}/seeds`,
     content: [
       {
         title: "Flower Seeds",
-        href: "/",
+        href: `${BASE_URL}/flower-seeds`,
       },
       {
         title: "Vegetable Seeds",
-        href: "/",
+        href: `${BASE_URL}/vegetable-seeds`,
       },
       {
         title: "Microgreen Seeds",
-        href: "/",
+        href: `${BASE_URL}/microgreen-seeds`,
       },
       {
         title: "Herb Seeds",
-        href: "/",
+        href: `${BASE_URL}/herb-seeds`,
       },
       {
         title: "Flower Bulbs",
-        href: "/",
+        href: `${BASE_URL}/flower-bulbs`,
       },
       {
         title: "Fruit Seeds",
-        href: "/",
+        href: `${BASE_URL}/fruit-seeds`,
       },
       {
         title: "Tree & Grass Seeds",
-        href: "/",
+        href: `${BASE_URL}/tree-&-grass-seeds`,
       },
     ],
   },
   {
     title: "Pots & Planters",
-    href: "/docs/primitives/progress",
+    href: `${BASE_URL}/pots-&-planters`,
     content: [
       {
         title: "Plastic Pots",
@@ -85,19 +87,19 @@ export const MENU_ITEMS: { title: string; href: string, content: { title: string
   },
   {
     title: "Plant Care",
-    href: "/",
+    href: `${BASE_URL}/plant-care`,
     content: [
       {
         title: "Potting Mix & Fertilizers",
-        href: "/",
+        href: `${BASE_URL}/potting-mix-&-fertilizers`,
       },
       {
         title: "Garden Tools",
-        href: "/",
+        href: `${BASE_URL}/garden-tools`,
       },
       {
         title: "Watering Cans & Sprayers",
-        href: "/",
+        href: `${BASE_URL}/watering-cans-&-sprayers`,
       },
     ],
   },
