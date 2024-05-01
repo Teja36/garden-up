@@ -105,6 +105,24 @@ export const MENU_ITEMS: { title: string; href: string, content: { title: string
   },
 ];
 
+export const OFFERS: { title: string, img: string, href: string }[] = [
+  {
+    title: "",
+    img: "https://res.cloudinary.com/garden-up/image/upload/v1714595940/assets/Banner1_cyzowl.jpg",
+    href: "",
+  },
+  {
+    title: "",
+    img: "https://res.cloudinary.com/garden-up/image/upload/v1714595944/assets/Banner2_g3gstf.jpg",
+    href: "",
+  },
+  {
+    title: "",
+    img: "https://res.cloudinary.com/garden-up/image/upload/v1714595951/assets/Banner3_of3src.jpg",
+    href: "",
+  }
+];
+
 export const QUICK_BROWSE: { title: string, href: string, img: string }[] = [
   {
     title: "Bestsellers",
