@@ -10,13 +10,15 @@ import { OFFERS } from "@/constants/constants";
 const OfferCarousel = () => {
   return (
     <Swiper modules={[Navigation, Autoplay]} navigation autoplay>
-      {OFFERS.map((item) => (
-        <SwiperSlide>
-          <div className="relative w-full  h-64">
+      {OFFERS.map((item, index) => (
+        <SwiperSlide key={index}>
+          <div className="relative w-full h-64">
             <Image
               src={item.img}
               alt="Offer 1"
-              fill={true}
+              fill
+              priority
+              sizes="100vw"
               className="object-cover"
             />
           </div>

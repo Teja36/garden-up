@@ -11,12 +11,14 @@ const QuickBrowse = () => {
             href={href}
             className="flex flex-col items-center gap-1 md:gap-2 w-max"
           >
-            <div className="relative border-2 border-green-500 rounded-full w-[84px] h-[84px] md:w-32 md:h-32">
+            <div className="border-2 border-green-500 rounded-full">
               <Image
                 src={img}
                 alt={title}
-                fill
-                className="object-cover rounded-full border-4 border-white"
+                width={84}
+                height={84}
+                sizes="(max-width: 767px) 84px, 128px"
+                className="object-cover rounded-full border-4 border-white md:w-32"
               />
             </div>
             <span className="text-xs md:text-lg">{title}</span>

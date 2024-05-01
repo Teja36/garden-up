@@ -26,6 +26,7 @@ const DealOfTheWeek = async () => {
           src={product?.imageUrl ?? ""}
           alt={product.name}
           fill
+          sizes="(max-width: 767px) 100vw, 50vw"
           className="object-cover"
         />
       </div>

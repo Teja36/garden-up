@@ -7,27 +7,45 @@ const WhyGardenUp = () => {
 
       <div className="flex justify-around gap-4">
         <div className="flex flex-col items-center gap-4 w-[15ch] md:w-[20ch]">
-          <div className="relative w-10 h-10 md:w-16 md:h-16">
-            <Image src={"/RecyclablePackaging.avif"} alt="" fill={true} />
-          </div>
+          <Image
+            src={"/RecyclablePackaging.avif"}
+            alt=""
+            width={40}
+            height={40}
+            sizes="(max-width: 767px) 40px, 64px"
+            className="md:w-16"
+          />
+
           <span className="text-xs md:text-base font-medium text-center ">
             Secure and Recyclable Packaging
           </span>
         </div>
 
         <div className="flex flex-col items-center gap-4 w-[15ch] md:w-[20ch]">
-          <div className="relative w-10 h-10 md:w-16 md:h-16">
-            <Image src={"/FreeReplacement.avif"} alt="" fill={true} />
-          </div>
+          <Image
+            src={"/FreeReplacement.avif"}
+            alt=""
+            width={40}
+            height={40}
+            sizes="(max-width: 767px) 40px, 64px"
+            className="md:w-16"
+          />
+
           <span className="text-xs md:text-base font-medium text-center ">
             Free Replacements if Damaged
           </span>
         </div>
 
         <div className="flex flex-col items-center gap-4 w-[15ch] md:w-[20ch]">
-          <div className="relative w-10 h-10 md:w-16 md:h-16">
-            <Image src={"/SelfWateringPots.avif"} alt="" fill={true} />
-          </div>
+          <Image
+            src={"/SelfWateringPots.avif"}
+            alt=""
+            width={40}
+            height={40}
+            sizes="(max-width: 767px) 40px, 64px"
+            className="md:w-16"
+          />
+
           <span className="text-xs md:text-base font-medium text-center ">
             Self-Watering Pots with Every Plant
           </span>
