@@ -57,6 +57,6 @@ export async function postReview(productId: number, formData: FormData) {
         },
     });
 
-    redirect(`/products/${productId}`, 'replace');
+    redirect(`/products/${productId}`);
 
 }
