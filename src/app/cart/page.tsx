@@ -24,7 +24,7 @@ type itemType = {
   quantity: number;
 };
 
-const page = () => {
+const CartPage = () => {
   const [items, setItems] = useState<itemType[] | null>();
 
   const cartItems = useCartStore((state) => state.cart);
@@ -150,4 +150,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default CartPage;

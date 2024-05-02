@@ -19,7 +19,7 @@ type itemType = {
   quantity: number;
 };
 
-const page = () => {
+const WishlistPage = () => {
   const [items, setItems] = useState<itemType[] | null>();
 
   const wishlist = useWishlistStore((state) => state.wishlist);
@@ -108,4 +108,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default WishlistPage;
