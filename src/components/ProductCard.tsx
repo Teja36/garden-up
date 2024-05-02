@@ -35,6 +35,7 @@ const ProductCard = ({
             src={imageUrl ?? ""}
             alt="plant"
             fill={true}
+            sizes="(max-width: 319px) 100vw, (max-width: 1023px) 50vw, 25vw"
             className="object-cover lg:group-hover:scale-105 transition ease-linear duration-300 animate-fade-in"
           />
           {discount && (
