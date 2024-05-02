@@ -2,7 +2,6 @@ import Image from "next/image";
 import Rating from "@/components/Rating";
 import formatDate from "../../../../utils/formatDate";
 import prisma from "../../../../utils/db";
-import { Decimal } from "@prisma/client/runtime/library";
 import { postReview } from "@/actions/reviews";
 import RatingInput from "@/components/RatingInput";
 
@@ -49,7 +48,7 @@ const CustomerReviews = async ({ productId }: { productId: number }) => {
         {reviews.length > 0 ? (
           <>
             <div>
-              <Rating rating={new Decimal(ratingAverage)} />
+              <Rating rating={ratingAverage} />
               <p className="text-md">
                 {ratingAverage} based on {reviews.length} reviews
               </p>
@@ -57,7 +56,7 @@ const CustomerReviews = async ({ productId }: { productId: number }) => {
             <div className="px-4 border-x border-gray-200">
               {dataForHistogram.map((val, index) => (
                 <div key={index} className="flex items-center mb-1">
-                  <Rating rating={new Decimal(5 - index)} size={15} />
+                  <Rating rating={5 - index} size={15} />
                   <div className="w-[120px] h-[18px] md:h-4 ml-1 border border-gray-200 ">
                     <div
                       style={{
@@ -171,7 +170,7 @@ const CustomerReviews = async ({ productId }: { productId: number }) => {
 
             <div className="flex flex-col">
               <span className="flex">
-                <Rating rating={new Decimal(rating)} />
+                <Rating rating={rating} />
                 <span className="text-sm ml-2">{formatDate(createdAt)}</span>
               </span>
               <span className="font-medium">{user.name}</span>
