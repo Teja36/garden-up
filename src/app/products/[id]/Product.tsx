@@ -5,7 +5,6 @@ import Image from "next/image";
 import Rating from "@/components/Rating";
 import ThisIsAGift from "./ThisIsAGift";
 import QuantityInput from "../../../components/QuantityInput";
-import { Decimal } from "@prisma/client/runtime/library";
 import AddToCartWithQuantity from "../../../components/AddToCartWithQuantity";
 import StickyCard from "./StickyCard";
 import { useInView } from "react-intersection-observer";
@@ -17,7 +16,7 @@ type ProductProps = {
   imageUrl: string | null;
   price: number;
   stock: number;
-  rating: Decimal | null;
+  rating: number | null;
   discount: number | null;
   featured: boolean | null;
 };
@@ -79,7 +78,7 @@ const Product = ({
               <AddToCartWithQuantity productId={id} />
             ) : (
               <>
-                <QuantityInput />
+                <QuantityInput updateChange={() => {}} />
                 <button
                   disabled
                   className="text-white bg-green-300 uppercase p-2 w-full rounded-sm hover:bg-green-200 cursor-not-allowed"

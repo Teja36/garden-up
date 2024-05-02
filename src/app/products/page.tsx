@@ -3,6 +3,8 @@ import prisma from "../../../utils/db";
 import ProductCard from "@/components/ProductCard";
 import SortByDropdown from "../../components/SortByDropdown";
 
+import decimalToNumber from "../../../utils/decimalToNumber";
+
 const page = async ({
   searchParams,
 }: {
@@ -40,7 +42,7 @@ const page = async ({
         <SortByDropdown />
       </div>
       <div className="mt-4 grid grid-cols-2 gap-2 xs:gap-6 lg:grid-cols-4">
-        {products.map((product) => (
+        {decimalToNumber(products).map((product) => (
           <ProductCard key={product.id} {...product} />
         ))}
       </div>

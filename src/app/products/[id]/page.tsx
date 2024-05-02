@@ -15,7 +15,10 @@ const page = async ({ params }: { params: { id: string } }) => {
     <div className="container">
       {productData && (
         <>
-          <Product {...productData} />
+          <Product
+            {...productData}
+            rating={productData.rating?.toNumber() || null}
+          />
           <Recommended categoryId={productData?.categoryId} />
           <CustomerReviews productId={productData.id} />
         </>

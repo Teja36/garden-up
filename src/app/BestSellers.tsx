@@ -1,4 +1,5 @@
 import prisma from "../../utils/db";
+import decimalToNumber from "../../utils/decimalToNumber";
 
 import ProductSwiper from "./ProductSwiper";
 
@@ -14,7 +15,7 @@ const BestSellers = async () => {
     <ProductSwiper
       heading={"Best Sellers"}
       viewAllHref="/collections/plants?sort-by=bs"
-      products={products}
+      products={decimalToNumber(products)}
     />
   );
 };

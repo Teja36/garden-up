@@ -1,6 +1,7 @@
 import prisma from "../../../../utils/db";
 
 import ProductSwiper from "@/app/ProductSwiper";
+import decimalToNumber from "../../../../utils/decimalToNumber";
 
 type RecommendedProps = {
   categoryId: number;
@@ -14,7 +15,12 @@ const Recommended = async ({ categoryId }: RecommendedProps) => {
     take: 4,
   });
 
-  return <ProductSwiper heading="Customers also bought" products={products} />;
+  return (
+    <ProductSwiper
+      heading="Customers also bought"
+      products={decimalToNumber(products)}
+    />
+  );
 };
 
 export default Recommended;

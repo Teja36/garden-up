@@ -35,7 +35,7 @@ const DealOfTheWeek = async () => {
 
         <h1 className="text-green-700 font-medium text-3xl">{product.name}</h1>
 
-        <Rating rating={product?.rating} />
+        <Rating rating={product?.rating?.toNumber()} />
 
         <div className="flex gap-2 justify-start items-center mt-4">
           {Boolean(product?.discount) && (

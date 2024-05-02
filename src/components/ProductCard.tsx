@@ -2,7 +2,6 @@ import Image from "next/image";
 import Link from "next/link";
 
 import Rating from "./Rating";
-import { Decimal } from "@prisma/client/runtime/library";
 import AddToCartButton from "./AddToCartButton";
 import AddToWishlistButton from "./AddToWishlistButton";
 
@@ -10,7 +9,7 @@ type ProductCardProps = {
   id: number;
   name: string;
   imageUrl: string | null;
-  rating: Decimal | null;
+  rating: number | null;
   price: number;
   discount: number | null;
   stock: number;
@@ -49,7 +48,7 @@ const ProductCard = ({
         </h2>
         <div className="flex items-center">
           <Rating rating={rating} />
-          {rating?.toNumber()! > 0 && (
+          {(rating as number) > 0 && (
             <span className="font-medium text-sm text-green-600 ml-1">
               {rating?.toString()}
             </span>

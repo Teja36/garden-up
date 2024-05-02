@@ -1,8 +1,7 @@
 import { Star, StarHalf } from "lucide-react";
-import { Decimal } from "@prisma/client/runtime/library";
 
 type RatingProps = {
-  rating?: Decimal | null;
+  rating?: number | null;
   size?: number;
 };
 
