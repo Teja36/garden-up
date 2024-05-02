@@ -19,6 +19,7 @@ const InfiniteProducts = ({
     const products = await getProducts(
       searchParams,
       collectionName,
+      //@ts-ignore
       queryFunctionContext?.pageParam
     );
     return products;
