@@ -30,7 +30,7 @@ const page = async ({
         {searchQuery ? (
           <p className="w-full text-sm text-gray-400">
             {products.length} product{products.length > 1 && "s"} for{" "}
-            <span className="text-gray-700">'{searchQuery}'</span>
+            <span className="text-gray-700">&apos;{searchQuery}&apos;</span>
           </p>
         ) : (
           <p className="w-full text-sm text-gray-400">
